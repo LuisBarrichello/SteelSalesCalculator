@@ -1,5 +1,5 @@
-import IconGithub from "../assets/img/github-mark-white.png"
-import IconLinkedIn from "../assets/img/linkedin logo.png"
+import IconGithub from "../../assets/img/github-mark-white.png"
+import IconLinkedIn from "../../assets/img/linkedin logo.png"
 
 function Footer() {
 
@@ -9,7 +9,7 @@ function Footer() {
                 <span>Desenvolvidor por: <a href="" target="_blank" rel="noopener noreferrer" className="text-decoration-none text-light">Luís Gabriel Barrichello</a></span>
                 <div>
                     <a 
-                        href="" 
+                        href="https://github.com/LuisBarrichello" 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         className="text-decoration-none text-light d-flex gap-2 align-items-center"
@@ -18,7 +18,7 @@ function Footer() {
                         <span>GitHub</span>
                     </a>
                     <a 
-                        href="" 
+                        href="https://www.linkedin.com/in/luisgabrielbarrichello/" 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         className="text-decoration-none text-light d-flex gap-2 align-items-center"

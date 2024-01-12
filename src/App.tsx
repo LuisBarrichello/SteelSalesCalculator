@@ -1,56 +1,21 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import { Container } from 'react-bootstrap';
-import { useState } from 'react';
-import CalcSapatas from './components/CalcSapatas';
-import CalcBobininhas from './components/CalcBobininhas';
+import { Route, Routes } from "react-router-dom";
+
+/* components */
+import CalculatorSapatas from './components/calculators/calculatorsSapatas/CalculatorSapatas';
+import CalculatorBobininhas from './components/calculators/calculatorBobininhas/CalculatorBobininhas';
+import CalculatorEstribos from "./components/calculators/calculatorEstribos/CalculatorEstribos"
 import Home from './components/Home';
 
 function App() {
-  const [ calculatorSapatas, setCalculatorSapatas ] = useState(false);
-  const [ calculatorBobininhas, setCalculatorBobininhas ] = useState(false);
-
-  const definedTypeCalculatorSapatas = (event) => {
-    event.preventDefault()
-    setCalculatorSapatas(!calculatorSapatas)
-  }
-
-  const definedTypeCalculatorBobininhas = (event) => { 
-    event.preventDefault();
-    setCalculatorBobininhas(!calculatorBobininhas)
-  }
-
-  const resetCalculators = (event) => {
-    event.preventDefault();
-    setCalculatorSapatas(false);
-    setCalculatorBobininhas(false);
-  }
-
-  let MainComponentToRender;
-
-  if (calculatorSapatas) {
-    MainComponentToRender = <CalcSapatas />;
-  } else if (calculatorBobininhas) {
-    MainComponentToRender = <CalcBobininhas />;
-  } else {
-    /* setCalculatorSapatas(!calculatorSapatas)
-    setCalculatorBobininhas(!calculatorBobininhas) */
-    MainComponentToRender = <Home />;
-  }
 
   return (
-    <>
-      <Header 
-        calculatorSapata={definedTypeCalculatorSapatas} 
-        calculatorBobininha={definedTypeCalculatorBobininhas}
-        resetCalculators={resetCalculators}
-      ></Header>
-      <Container>
-        {MainComponentToRender}
-      </Container>
-      <Footer></Footer>
-    </>
+      <Routes>
+        <Route path='/' element={<Home/>}></Route>
+        <Route path='/calculator-sapatas' element={<CalculatorSapatas/>}></Route>
+        <Route path='/calculator-bobininhas' element={<CalculatorBobininhas/>}></Route>
+        <Route path='/calculator-estribos' element={<CalculatorEstribos/>}></Route>
+      </ Routes>
   )
 }
 
