@@ -55,10 +55,6 @@ export const handleCalculation = (formState: FormState, dataCoil: DataCoil,  ) =
 
             const widthCoil = cuts && Object.values(cuts).reduce((acc, cut) => acc + cut, 0)
             
-            console.log(cuts)
-
-            console.log(widthCoil)
-            
             if(widthCoil !== 1200) {
                 throw new Error('Largura dos cortes não pode ser superior a 1200mm')
             }
@@ -67,13 +63,10 @@ export const handleCalculation = (formState: FormState, dataCoil: DataCoil,  ) =
             
             if(selectedThickness) {
                 const cutsArray = Object.keys(cuts);
-                console.log(cutsArray) // NaN
-                Object.keys(cuts).forEach((cutIndex) => {
+                cutsArray.forEach((cutIndex) => {
                     const itemCoilCut = cuts[cutIndex];
                     weightCuts.push(((selectedThickness.weight / widthCoil) * itemCoilCut) * quantityOfMeters).toFixed(2)
                 })
-                console.log(weightCuts)
-    
                 return weightCuts
             }
         }

@@ -1,6 +1,6 @@
 ## Steel Sales Calculator
 
-O rojeto é uma calculado para Vendedores e pessoas interessadas nos calculos de construcao civil, onde as pessoas tendem a ter maior dificuldade de entendimento. O projeto também é para eu conhecer e aprender o básico bootstrap, além disso, praticar meus conhecimentos adiquirido recentemente
+O projeto é uma calculado para Vendedores e pessoas interessadas nos calculos de construcao civil, onde as pessoas tendem a ter maior dificuldade de entendimento. O projeto também é para eu conhecer e aprender o básico bootstrap, além disso, praticar meus conhecimentos adiquirido recentemente
 
 ## Deploy
 - Em produção, em breve [Em breve](#).

@@ -11,7 +11,7 @@ function Home () {
         <>
             <Header></Header>
             <Container>
-                <div className="container mt-3 mb-3">
+                <div className="container mt-3 mb-3 d-flex justify-content-center flex-column align-items-center" style={{minHeight: '80vh'}}>
                     <div className="row">
                     <div className="col-md">
                         <img src={Banner} alt="Banner" className="illustration-home img-fluid d-none d-sm-block" />
@@ -19,7 +19,7 @@ function Home () {
                         <div className="col mt-5 d-flex align-items-center justify-content-center flex-column">
                             <div>
                                 <h1 className="h2">Bem-vindo à Calculadora para facilitar as vendas da Comercial Goldoni</h1>
-                                <p className="lead">Facilitando seus cálculos relacionados a aços na construção civil e serralheria.</p>
+                                <p className="lead">Facilitando seus cálculos relacionados a aços na construção civil.</p>
                                 <div className="d-flex gap-2">
                                     <Link to="/calculator-bobininhas">
                                         <button type="button" className="btn btn-outline-dark">
@@ -29,6 +29,11 @@ function Home () {
                                     <Link to="/calculator-sapatas">
                                         <button type="button" className="btn btn-outline-dark">
                                             Calcular Sapatas
+                                        </button>
+                                    </Link>
+                                    <Link to="/calculator-estribos">
+                                        <button type="button" className="btn btn-outline-dark">
+                                            Calcular Estribos
                                         </button>
                                     </Link>
                                 </div>

@@ -11,7 +11,7 @@ import { FormEvent } from 'react';
 import { useState } from "react";
 import Header from "../../common/Header";
 import Footer from "../../common/Footer";
-
+import '../../../assets/css/calculatorResponsive.css';
 
 function CalcSapatas() {
     const [largura, setLargura] = useState(0);
@@ -71,50 +71,52 @@ function CalcSapatas() {
         <>
             <Header></Header>
             {result === true ? 
-                <Container className="mt-5 rounded-3 d-flex justify-content-center align-items-center flex-column" >
-                    <Table>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Bitola</th>
-                                <th>Quantidade de Estribos por Sapata</th>
-                                <th>Quantidade de Estribos Totais</th>
-                                <th>Largura</th>
-                                <th>Comprimento</th>
-                                <th>Peso Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>{bitola}</td>
-                                <td>{quantidadeDeFerros / 2}</td>
-                                <td>{quantidadeDeFerros / 2 * quantidadeDeSapatas}</td>
-                                <td>{largura}</td>
-                                <td>{altura}</td>
-                                <td>{weightEstribos}</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>{bitola}</td>
-                                <td>{quantidadeDeFerros / 2}</td>
-                                <td>{quantidadeDeFerros / 2 * quantidadeDeSapatas}</td>
-                                <td>{comprimento}</td>
-                                <td>{altura - 2}</td>
-                                <td>{weightEstribosLess2}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Total</strong></td>
-                                <td>-</td>
-                                <td>{quantidadeDeFerros}</td>
-                                <td>{quantidadeDeFerros * quantidadeDeSapatas}</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>{Number(weightEstribosLess2 + weightEstribos).toFixed(2)}</td>
-                            </tr>
-                        </tbody>
-                    </Table> 
-                    <Card className="mb-3" border="danger">
+                <Container className="mt-5 rounded-3 d-flex flex-column" >
+                    <div className="table-responsive">    
+                        <Table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Bitola</th>
+                                    <th>Quantidade de Estribos por Sapata</th>
+                                    <th>Quantidade de Estribos Totais</th>
+                                    <th>Largura</th>
+                                    <th>Comprimento</th>
+                                    <th>Peso Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>{bitola}</td>
+                                    <td>{quantidadeDeFerros / 2}</td>
+                                    <td>{quantidadeDeFerros / 2 * quantidadeDeSapatas}</td>
+                                    <td>{largura}</td>
+                                    <td>{altura}</td>
+                                    <td>{weightEstribos} Kg</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>{bitola}</td>
+                                    <td>{quantidadeDeFerros / 2}</td>
+                                    <td>{quantidadeDeFerros / 2 * quantidadeDeSapatas}</td>
+                                    <td>{comprimento}</td>
+                                    <td>{altura - 2}</td>
+                                    <td>{weightEstribosLess2} Kg</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Total</strong></td>
+                                    <td>-</td>
+                                    <td>{quantidadeDeFerros}</td>
+                                    <td>{quantidadeDeFerros * quantidadeDeSapatas}</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>{Number(weightEstribosLess2 + weightEstribos).toFixed(2)} Kg</td>
+                                </tr>
+                            </tbody>
+                        </Table> 
+                    </div>
+                    <Card className="mb-3 w-50 text-center align-self-center" border="danger">
                         <Card.Body className="text-bold"><strong>Quantidade de Sapatas: {quantidadeDeSapatas}</strong></Card.Body>
                     </Card>
                     <div className="w-100 d-flex justify-content-center align-items-center gap-5">
@@ -124,12 +126,12 @@ function CalcSapatas() {
                     </div>
                     <Container className="mt-4 mb-4 d-flex justify-content-center align-items-center gap-2 flex-column">
                         <h3 className="text-body-secondary">Montagem das Sapatas:</h3>
-                        <div className="mt-2 d-flex justify-content-center align-items-center gap-2">
-                            <Image src={ImgSapata}></Image>
+                        <div className="mt-2 d-flex justify-content-center align-items-center gap-2 container-imgs-sapatas">
+                            <Image src={ImgSapata} alt="Sapata"></Image>
                             <div>
                                 <div className="w-100 d-flex justify-content-center flex-column align-items-center mb-3">
                                     <div>
-                                        <span>{largura}</span>
+                                        <span>{altura}</span>
                                         <Image src={ImgEstribo}></Image>
                                     </div>
                                     <span>{comprimento}</span>
@@ -144,7 +146,6 @@ function CalcSapatas() {
                             </div>
                         </div>
                     </Container>
-                    
                 </Container>
                 : 
                 <Container>

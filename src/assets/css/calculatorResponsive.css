@@ -1,0 +1,7 @@
+
+@media (min-width: 300px) and (max-width: 750px) {
+    .container-imgs-sapatas, .container-estribo-responsive {
+        display: flex;
+        flex-direction: column !important;
+    }
+}

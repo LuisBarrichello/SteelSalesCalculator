@@ -22,51 +22,62 @@ function CalculationResult({ result, resetForm }: Props) {
 
     return (
         <>
-            <table className="table table-hover mt-2">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Quantidade de Bobinas</th>
-                        <th>Qualidade da matéria prima</th>
-                        <th>Espessura</th>
-                        <th>Largura</th>
-                        <th>Comprimento</th>
-                        <th>Peso</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {hasCuts === true ? 
-                        Object.keys(cuts).map((_, cutIndex) => {
-                            return (
-                                <tr key={cutIndex}>
-                                    <td>{cutIndex}</td>
+            <div className="table-responsive">
+                <table className="table table-hover mt-2">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Quantidade de Bobinas</th>
+                            <th>Qualidade da matéria prima</th>
+                            <th>Espessura</th>
+                            <th>Largura</th>
+                            <th>Comprimento</th>
+                            <th>Peso</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {hasCuts === true ? 
+                            Object.keys(cuts).map((_, cutIndex) => {
+                                return (
+                                    <>
+                                        <tr >
+                                            <td>{cutIndex}</td>
+                                            <td>{result.quantityOfCoil}</td>
+                                            <td>{result.qualityOfMaterial.toUpperCase()}</td>
+                                            <td>{result.thickness}</td>
+                                            <td>{cuts[cutIndex]}</td>
+                                            <td>{result.quantityOfMeters}</td>
+                                            <td>{result.weight[cutIndex].toFixed(2)} Kg</td>
+                                        </tr>
+                                        
+                                    </>
+                                )
+                            })
+                        :
+                            <>
+                                <tr>
+                                    <td>1</td>
                                     <td>{result.quantityOfCoil}</td>
                                     <td>{result.qualityOfMaterial.toUpperCase()}</td>
                                     <td>{result.thickness}</td>
-                                    <td>{cuts[cutIndex]}</td>
+                                    <td>1200</td>
                                     <td>{result.quantityOfMeters}</td>
-                                    <td>{result.weight[cutIndex]} Kg</td>
+                                    <td>{result.weight} Kg</td>
                                 </tr>
-                            )
-                        })
-                    :
-                        <>
-                            <tr>
-                                <td>1</td>
-                                <td>{result.quantityOfCoil}</td>
-                                <td>{result.qualityOfMaterial.toUpperCase()}</td>
-                                <td>{result.thickness}</td>
-                                <td>1200</td>
-                                <td>{result.quantityOfMeters}</td>
-                                <td>{result.weight} Kg</td>
-                            </tr>
-                            <tr>
-                                <td>{result.weight.reduce((acc, item) => acc + item, 0)}</td>
-                            </tr>
-                        </>
-                    }
-                </tbody>
-            </table>
+                            </>
+                        }
+                        <tr>
+                            <td><strong>Peso Total</strong></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>{result.weight.reduce((acc, item) => acc + item)} Kg</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <section className="mt-5">
                 <div className="w-100 d-flex justify-content-center align-items-center gap-5">
                     <button className="btn btn-primary" onClick={() => resetForm()}>Refazer Cálculo</button>

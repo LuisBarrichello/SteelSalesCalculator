@@ -1,6 +1,6 @@
 import Header from "../../common/Header";
 import Footer from "../../common/Footer";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FormCalculatorEstribos from "./FormCalculatorEstribos";
 import Result from "./Result"
 
@@ -40,10 +40,6 @@ function CalculatorEstribos() {
         lengthSides: {},
         quantityTotal: 0,
     });
-
-    useEffect(() => {
-        console.log('RESULT: ', result)
-    })
 
     const resetForm = () => {
         setFormData({

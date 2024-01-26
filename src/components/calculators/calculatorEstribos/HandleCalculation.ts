@@ -1,4 +1,4 @@
-import { FormData } from "./FormCalculatorEstribos"
+import { FormData } from "./CalculatorEstribos";
 interface RebarData {
     weights: {
         [key: string]: number;
@@ -63,7 +63,6 @@ const calculationShapeSquare = (
     ) => {
     
     const result = (quantityTotal * ((transpasse * 2) + (lengthSides[0] * 4)) * weightGauge) / 100;
-    console.log(result.toFixed(2))
     return result.toFixed(2)
 }
 
@@ -74,7 +73,6 @@ const calculationShapeRectangular = (
         transpasse: number,
     ) => {
         const result = (quantityTotal * ((transpasse * 2) + (lengthSides[0] * 2) + (lengthSides[1] * 2)) * weightGauge) / 100;
-        console.log(result.toFixed(2))
         return result.toFixed(2)
 }
 
@@ -86,7 +84,6 @@ const calculationShapeTriangular = (
     ) => {
 
     const result = (quantityTotal * ((transpasse * 2) + (lengthSides[0] * 3)) * weightGauge) / 100;
-    console.log(result.toFixed(2))
     return result.toFixed(2)
 }
 
@@ -99,6 +96,5 @@ const calculationShapeCircular = (
         const pi = Math.PI;
         const circumference = 2 * pi * lengthSides[0];
         const result = (quantityTotal * ((transpasse * 2) + circumference) * weightGauge) / 100;
-        console.log(result.toFixed(2))
         return result.toFixed(2)
 }

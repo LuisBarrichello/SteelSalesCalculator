@@ -1,5 +1,5 @@
 import IconGithub from "../../assets/img/github-mark-white.png"
-import IconLinkedIn from "../../assets/img/linkedin logo.png"
+import IconLinkedIn from "../../assets/img/linkedin.svg"
 
 function Footer() {
 
