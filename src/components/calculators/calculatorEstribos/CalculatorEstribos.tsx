@@ -4,13 +4,17 @@ import { useState } from "react";
 import FormCalculatorEstribos from "./FormCalculatorEstribos";
 import Result from "./Result"
 
+
+interface LengthSides {
+    [key: number]: number;
+}
 export interface ResultInterface {
     status: boolean;
     weight: number;
     shape: string;
     quantitySide: number;
     gauge: number;
-    lengthSides: object;
+    lengthSides: LengthSides;
     quantityTotal: number;
 }
 
@@ -18,7 +22,7 @@ export interface FormData {
     shape: string;
     quantitySide: number;
     gauge: number;
-    lengthSides: object;
+    lengthSides: LengthSides;
     quantityTotal: number;
 }
 

@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { ResultInterface } from './CalculatorEstribos';
 import ImgEstriboCircular from '../../../assets/img/estribo-circular.png'
 import ImgEstriboTriangular from '../../../assets/img/estribo-triangular.png'
