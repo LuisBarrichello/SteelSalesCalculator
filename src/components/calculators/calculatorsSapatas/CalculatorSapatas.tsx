@@ -60,7 +60,7 @@ function CalcSapatas() {
     }
 
     const weightEstribos = calculatorWeightEstribos(largura, altura, bitola, quantidadeDeFerros);
-    const weightEstribosLess2 = calculatorWeightEstribos(largura, altura - 2, bitola, quantidadeDeFerros);
+    const weightEstribosLess2 = calculatorWeightEstribos(comprimento, altura - 2, bitola, quantidadeDeFerros);
 
     const returnForm = (event: FormEvent) => {
         event.preventDefault()
@@ -134,7 +134,7 @@ function CalcSapatas() {
                                         <span>{altura}</span>
                                         <Image src={ImgEstribo}></Image>
                                     </div>
-                                    <span>{comprimento}</span>
+                                    <span>{largura}</span>
                                 </div>
                                 <div className="w-100 d-flex justify-content-center flex-column align-items-center">
                                     <div>
