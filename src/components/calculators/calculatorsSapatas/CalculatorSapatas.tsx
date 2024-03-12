@@ -148,7 +148,7 @@ function CalcSapatas() {
                     </Container>
                 </Container>
                 : 
-                <Container>
+                <Container className="min-height">
                     <Container>
                         <h1 className="mb-4 mt-4 text-center">Cálculo Sapatas</h1>
                     </Container>

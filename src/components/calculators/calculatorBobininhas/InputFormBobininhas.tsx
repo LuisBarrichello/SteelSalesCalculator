@@ -32,6 +32,7 @@ function InputFormBobininhas({ formState, dataCoil, handleInputChange, handleSub
 
     return (
         <>
+            <h1 className="mb-4 mt-4 text-center">Cálculo Bobininhas</h1>
             <form action="">
                 <div className="form-floating mb-3 mt-3">
                     <select 

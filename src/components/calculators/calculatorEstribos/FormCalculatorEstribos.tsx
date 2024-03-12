@@ -46,7 +46,7 @@ function FormCalculatorEstribos({setResult, setFormData, formData}: FormProps) {
     }
     
     return (
-        <section className="container">
+        <section className="container min-height">
             <h1 className="mb-4 mt-4 text-center">Cálculo Estribos</h1>
             <form action="">
                 <div  className="form-floating mb-3 mt-3">

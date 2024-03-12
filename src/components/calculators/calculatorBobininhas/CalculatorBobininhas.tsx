@@ -127,7 +127,7 @@ function CalcBobininhas() {
     return (
         <>
             <Header></Header>
-            <div className="container mb-3 mt-3">
+            <div className="container mb-3 mt-3 min-height" >
                 {result.status === true ? 
                     <ComponentCalculationResult result={result} resetForm={resetForm}/>
                     :    
