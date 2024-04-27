@@ -88,7 +88,7 @@ function CalculationResult({ result, resetForm }: Props) {
             <section className="container">
                 <div className="row mt-5">
                     <div className="col-sm-6 no-print">
-                        <h5>Resumo do processão de Fabricação</h5>
+                        <h5>Resumo do processo de Fabricação</h5>
                         <img src={ImgSliter} alt="" className="mx-auto d-block" style={{ maxWidth: '100%', height: 'auto' }}/>
                     </div>
                     <div className="col">

@@ -65,7 +65,7 @@ export const handleCalculation = (formState: FormState, dataCoil: DataCoil,  ) =
                 const cutsArray = Object.keys(cuts);
                 cutsArray.forEach((cutIndex) => {
                     const itemCoilCut = cuts[cutIndex];
-                    weightCuts.push(((selectedThickness.weight / widthCoil) * itemCoilCut) * quantityOfMeters).toFixed(2)
+                    weightCuts.push((((selectedThickness.weight / widthCoil) * itemCoilCut) * quantityOfMeters) * quantityOfCoil).toFixed(2)
                 })
                 return weightCuts
             }
