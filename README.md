@@ -3,7 +3,7 @@
 O projeto é uma calculado para Vendedores e pessoas interessadas nos calculos de construcao civil, onde as pessoas tendem a ter maior dificuldade de entendimento. O projeto também é para eu conhecer e aprender o básico bootstrap, além disso, praticar meus conhecimentos adiquirido recentemente
 
 ## Deploy
-- Em produção, em breve [Em breve](#).
+- [Steel Sales Calculator](https://steel-sales-calculator.vercel.app/).
 
 ### Descrição do projeto
 Este projeto consiste em uma aplicação web desenvolvida utilizando React, typescript e bootstrap, que oferece três calculadoras especializadas para facilitar operações relacionadas a aços na construção civil, inicialmente para a Comercial Goldoni.
@@ -33,6 +33,14 @@ Este projeto consiste em uma aplicação web desenvolvida utilizando React, type
 - Bootstrap
 
 ## Screenshots
+![img](./src/assets/img/screenshots/1710606760935.jpg)
+![img](./src/assets/img/screenshots/1710606760267.png)
+![img](./src/assets/img/screenshots/1710606760590.png)
+![img](./src/assets/img/screenshots/1710606760252.png)
+![img](./src/assets/img/screenshots/1710606760677.png)
+![img](./src/assets/img/screenshots/1710606760371.png)
+![img](./src/assets/img/screenshots/1710606760709.png)
+![img](./src/assets/img/screenshots/1710606760044.png)
 
 
 ## Autor
