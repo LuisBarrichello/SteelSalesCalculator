@@ -23,7 +23,10 @@ function FormCalculatorEstribos({setResult, setFormData, formData}: FormProps) {
             }
         } else if(field.startsWith('lengthSides_')) {
             const indexSide = field.split('_')[1]
-            const sides = { ...formData.lengthSides, [indexSide]: Number(value)}
+            const sides = { 
+                ...formData.lengthSides, 
+                [indexSide]: Number(value)
+            }
             setFormData((prevState: FormData) => ({
                 ...prevState,
                 lengthSides: sides

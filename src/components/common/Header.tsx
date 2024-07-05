@@ -32,6 +32,12 @@ function Header() {
                                 Calcular Estribos
                             </NavLink>
                         </li>
+                        <li>
+                            <NavLink to="/calculator-colunas" className="nav-link position-relative">
+                            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">NEW</span>
+                                Calcular Colunas
+                            </NavLink>
+                        </li>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
