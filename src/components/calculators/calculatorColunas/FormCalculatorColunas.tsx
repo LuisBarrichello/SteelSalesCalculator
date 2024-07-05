@@ -31,7 +31,12 @@ interface FormCalculatorColunasProps {
 }
 
 const FormCalculatorColunas = ({ onSubmit }: FormCalculatorColunasProps) => {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<dataColunas>();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<dataColunas>();
 
   const shapeValue = watch("stirrupMeasurements.shape");
 
@@ -47,48 +52,76 @@ const FormCalculatorColunas = ({ onSubmit }: FormCalculatorColunasProps) => {
           <div className="form-floating mb-3 mt-3">
             <input
               type="number"
-              className={`form-control ${errors.numberOfColumns ? 'is-invalid' : ''}`}
+              className={`form-control ${
+                errors.numberOfColumns ? "is-invalid" : ""
+              }`}
               {...register("numberOfColumns", { required: true, min: 1 })}
             ></input>
             <label htmlFor="">Qual quantidade de colunas?</label>
-            {errors.numberOfColumns && <div className="invalid-feedback">Campo obrigatório e deve ser maior que 0</div>}
+            {errors.numberOfColumns && (
+              <div className="invalid-feedback">
+                Campo obrigatório e deve ser maior que 0
+              </div>
+            )}
           </div>
 
           <div className="form-floating mb-3 mt-3">
             <input
               type="number"
-              className={`form-control ${errors.numberOfIronBars ? 'is-invalid' : ''}`}
+              className={`form-control ${
+                errors.numberOfIronBars ? "is-invalid" : ""
+              }`}
               {...register("numberOfIronBars", { required: true, min: 3 })}
             ></input>
             <label htmlFor="">Qual quantidade de ferros por colunas?</label>
-            {errors.numberOfIronBars && <div className="invalid-feedback">Campo obrigatório e deve ser maior que 2</div>}
+            {errors.numberOfIronBars && (
+              <div className="invalid-feedback">
+                Campo obrigatório e deve ser maior que 2
+              </div>
+            )}
           </div>
 
           <div className="form-floating mb-3 mt-3">
             <input
               type="number"
-              className={`form-control ${errors.metersOfColumns ? 'is-invalid' : ''}`}
+              step="0.1"
+              className={`form-control ${
+                errors.metersOfColumns ? "is-invalid" : ""
+              }`}
               {...register("metersOfColumns", { required: true, min: 1 })}
             ></input>
             <label htmlFor="">Qual tamanho em metros das colunas?</label>
-            {errors.metersOfColumns && <div className="invalid-feedback">Campo obrigatório e deve ser maior que 0</div>}
+            {errors.metersOfColumns && (
+              <div className="invalid-feedback">
+                Campo obrigatório e deve ser maior que 0
+              </div>
+            )}
           </div>
 
           <div className="form-floating mb-3 mt-3">
             <input
               type="number"
-              className={`form-control ${errors.metersHaveStirrup ? 'is-invalid' : ''}`}
+              step="0.1"
+              className={`form-control ${
+                errors.metersHaveStirrup ? "is-invalid" : ""
+              }`}
               {...register("metersHaveStirrup", { required: true, min: 1 })}
             ></input>
             <label htmlFor="">
               Qual metragem das colunas que irá ter estribos?
             </label>
-            {errors.metersHaveStirrup && <div className="invalid-feedback">Campo obrigatório e deve ser maior que 0</div>}
+            {errors.metersHaveStirrup && (
+              <div className="invalid-feedback">
+                Campo obrigatório e deve ser maior que 0
+              </div>
+            )}
           </div>
 
           <div className="form-floating mb-3 mt-3">
             <select
-              className={`form-select ${errors.gaugeIronBars ? 'is-invalid' : ''}`}
+              className={`form-select ${
+                errors.gaugeIronBars ? "is-invalid" : ""
+              }`}
               {...register("gaugeIronBars", { required: true })}
             >
               <option value="4.2">4.2</option>
@@ -101,24 +134,34 @@ const FormCalculatorColunas = ({ onSubmit }: FormCalculatorColunasProps) => {
               <option value="20">20</option>
             </select>
             <label htmlFor="gauge">Qual a bitola dos ferros {}?</label>
-            {errors.gaugeIronBars && <div className="invalid-feedback">Campo obrigatório</div>}
+            {errors.gaugeIronBars && (
+              <div className="invalid-feedback">Campo obrigatório</div>
+            )}
           </div>
 
           <div className="form-floating mb-3 mt-3">
             <input
               type="number"
-              className={`form-control ${errors.stirrupSpacing ? 'is-invalid' : ''}`}
+              className={`form-control ${
+                errors.stirrupSpacing ? "is-invalid" : ""
+              }`}
               {...register("stirrupSpacing", { required: true, min: 1 })}
             ></input>
             <label htmlFor="">
               Qual espaçamento dos estribos? (em centímetros)
             </label>
-            {errors.stirrupSpacing && <div className="invalid-feedback">Campo obrigatório e deve ser maior que 0</div>}
+            {errors.stirrupSpacing && (
+              <div className="invalid-feedback">
+                Campo obrigatório e deve ser maior que 0
+              </div>
+            )}
           </div>
 
           <div className="form-floating mb-3 mt-3">
             <select
-              className={`form-select ${errors.stirrupMeasurements?.shape ? 'is-invalid' : ''}`}
+              className={`form-select ${
+                errors.stirrupMeasurements?.shape ? "is-invalid" : ""
+              }`}
               {...register("stirrupMeasurements.shape", { required: true })}
             >
               <option value="square">Quadrado</option>
@@ -127,7 +170,9 @@ const FormCalculatorColunas = ({ onSubmit }: FormCalculatorColunasProps) => {
               <option value="circular">Circular</option>
             </select>
             <label htmlFor="">Qual shape dos estribos?</label>
-            {errors.stirrupMeasurements?.shape && <div className="invalid-feedback">Campo obrigatório</div>}
+            {errors.stirrupMeasurements?.shape && (
+              <div className="invalid-feedback">Campo obrigatório</div>
+            )}
           </div>
 
           {shapeValue === "rectangular" ? (
@@ -135,7 +180,12 @@ const FormCalculatorColunas = ({ onSubmit }: FormCalculatorColunasProps) => {
               <div className="form-floating mb-3 mt-3">
                 <input
                   type="number"
-                  className={`form-control ${errors.stirrupMeasurements?.lengthSides?.length1 ? 'is-invalid' : ''}`}
+                  step="0.1"
+                  className={`form-control ${
+                    errors.stirrupMeasurements?.lengthSides?.length1
+                      ? "is-invalid"
+                      : ""
+                  }`}
                   {...register("stirrupMeasurements.lengthSides.length1", {
                     required: true,
                     min: 1,
@@ -144,12 +194,21 @@ const FormCalculatorColunas = ({ onSubmit }: FormCalculatorColunasProps) => {
                 <label htmlFor="">
                   Qual tamanho do primeiro lado dos estribos? (em centímetros)
                 </label>
-                {errors.stirrupMeasurements?.lengthSides?.length1 && <div className="invalid-feedback">Campo obrigatório e deve ser maior que 0</div>}
+                {errors.stirrupMeasurements?.lengthSides?.length1 && (
+                  <div className="invalid-feedback">
+                    Campo obrigatório e deve ser maior que 0
+                  </div>
+                )}
               </div>
               <div className="form-floating mb-3 mt-3">
                 <input
                   type="number"
-                  className={`form-control ${errors.stirrupMeasurements?.lengthSides?.length2 ? 'is-invalid' : ''}`}
+                  step="0.1"
+                  className={`form-control ${
+                    errors.stirrupMeasurements?.lengthSides?.length2
+                      ? "is-invalid"
+                      : ""
+                  }`}
                   {...register("stirrupMeasurements.lengthSides.length2", {
                     required: true,
                     min: 1,
@@ -158,7 +217,11 @@ const FormCalculatorColunas = ({ onSubmit }: FormCalculatorColunasProps) => {
                 <label htmlFor="">
                   Qual tamanho do segundo lado dos estribos? (em centímetros)
                 </label>
-                {errors.stirrupMeasurements?.lengthSides?.length2 && <div className="invalid-feedback">Campo obrigatório e deve ser maior que 0</div>}
+                {errors.stirrupMeasurements?.lengthSides?.length2 && (
+                  <div className="invalid-feedback">
+                    Campo obrigatório e deve ser maior que 0
+                  </div>
+                )}
               </div>
             </>
           ) : (
@@ -168,7 +231,12 @@ const FormCalculatorColunas = ({ onSubmit }: FormCalculatorColunasProps) => {
                   <>
                     <input
                       type="number"
-                      className={`form-control ${errors.stirrupMeasurements?.lengthSides?.radius ? 'is-invalid' : ''}`}
+                      step="0.1"
+                      className={`form-control ${
+                        errors.stirrupMeasurements?.lengthSides?.radius
+                          ? "is-invalid"
+                          : ""
+                      }`}
                       {...register("stirrupMeasurements.lengthSides.radius", {
                         required: true,
                         min: 1,
@@ -177,13 +245,22 @@ const FormCalculatorColunas = ({ onSubmit }: FormCalculatorColunasProps) => {
                     <label htmlFor="">
                       Qual o raio dos estribos? (em centímetros)
                     </label>
-                    {errors.stirrupMeasurements?.lengthSides?.radius && <div className="invalid-feedback">Campo obrigatório e deve ser maior que 0</div>}
+                    {errors.stirrupMeasurements?.lengthSides?.radius && (
+                      <div className="invalid-feedback">
+                        Campo obrigatório e deve ser maior que 0
+                      </div>
+                    )}
                   </>
                 ) : (
                   <>
                     <input
                       type="number"
-                      className={`form-control ${errors.stirrupMeasurements?.lengthSides?.length1 ? 'is-invalid' : ''}`}
+                      step="0.1"
+                      className={`form-control ${
+                        errors.stirrupMeasurements?.lengthSides?.length1
+                          ? "is-invalid"
+                          : ""
+                      }`}
                       {...register("stirrupMeasurements.lengthSides.length1", {
                         required: true,
                         min: 1,
@@ -192,7 +269,11 @@ const FormCalculatorColunas = ({ onSubmit }: FormCalculatorColunasProps) => {
                     <label htmlFor="">
                       Qual tamanho dos estribos? (em centímetros)
                     </label>
-                    {errors.stirrupMeasurements?.lengthSides?.length1 && <div className="invalid-feedback">Campo obrigatório e deve ser maior que 0</div>}
+                    {errors.stirrupMeasurements?.lengthSides?.length1 && (
+                      <div className="invalid-feedback">
+                        Campo obrigatório e deve ser maior que 0
+                      </div>
+                    )}
                   </>
                 )}
               </div>
@@ -201,7 +282,9 @@ const FormCalculatorColunas = ({ onSubmit }: FormCalculatorColunasProps) => {
 
           <div className="form-floating mb-3 mt-3">
             <select
-              className={`form-select ${errors.stirrupMeasurements?.gauge ? 'is-invalid' : ''}`}
+              className={`form-select ${
+                errors.stirrupMeasurements?.gauge ? "is-invalid" : ""
+              }`}
               {...register("stirrupMeasurements.gauge", { required: true })}
             >
               <option value="4.2">4.2</option>
@@ -214,7 +297,9 @@ const FormCalculatorColunas = ({ onSubmit }: FormCalculatorColunasProps) => {
               <option value="20">20</option>
             </select>
             <label htmlFor="gauge">Qual a bitola dos estribos?</label>
-            {errors.stirrupMeasurements?.gauge && <div className="invalid-feedback">Campo obrigatório</div>}  
+            {errors.stirrupMeasurements?.gauge && (
+              <div className="invalid-feedback">Campo obrigatório</div>
+            )}
           </div>
 
           <button className="btn btn-primary mb-4" type="submit">
