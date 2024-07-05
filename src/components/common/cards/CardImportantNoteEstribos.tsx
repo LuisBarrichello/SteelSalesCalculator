@@ -17,4 +17,4 @@ function CardImportantNoteEstribos() {
   );
 }
 
-export default CardImportantNoteEstribos
+export default CardImportantNoteEstribos;

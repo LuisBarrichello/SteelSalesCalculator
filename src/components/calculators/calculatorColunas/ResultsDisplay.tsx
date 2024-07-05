@@ -9,6 +9,7 @@ interface Props {
 
 const ResultsDisplay = ({ result, resetForm }: Props) => {
   const shape = result.stirrupMeasurements?.shape;
+  const radius = result.stirrupMeasurements?.lengthSides?.radius ?? 0;
 
   return (
     <>
@@ -83,13 +84,7 @@ const ResultsDisplay = ({ result, resetForm }: Props) => {
               <td>{result.numberOfStirrupsPerColumns}</td>
               <td>{result.totalNumberOfStirrups}</td>
               <td>{result.stirrupMeasurements?.gauge}mm</td>
-              {shape === "circular" ? (
-                <td>{`${
-                  result.stirrupMeasurements?.lengthSides?.radius * 2
-                } cm`}</td>
-              ) : (
-                ""
-              )}
+              {shape === "circular" ? <td>{`${radius * 2} cm`}</td> : ""}
               <td>{result.stirrupSpacing}cm</td>
               <td>{result.totalWeightOfStirrups} kg</td>
             </tr>
@@ -104,7 +99,7 @@ const ResultsDisplay = ({ result, resetForm }: Props) => {
           Imprimir
         </button>
       </div>
-      
+
       <div className="mb-4 container d-flex justify-content-center align-items-center container-estribo-responsive no-print">
         <div className="no-print w-25">
           <img src={ImgColuna} alt="" className="img-fluid" />

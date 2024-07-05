@@ -93,8 +93,8 @@ function Result({ result, resetForm }: ResultProps) {
           <span>{result.lengthSides[1]}</span>
         </div>
         <div>
-            <h4>Obervação Importantes</h4>
-            <CardImportantNoteEstribos></CardImportantNoteEstribos>
+          <h4>Obervação Importantes</h4>
+          <CardImportantNoteEstribos></CardImportantNoteEstribos>
         </div>
       </section>
       <section className="container"></section>

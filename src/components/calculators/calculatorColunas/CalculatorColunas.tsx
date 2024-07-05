@@ -77,6 +77,11 @@ function CalculatorColunas() {
     });
 
     setShowResult(true);
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
 
   const resetForm = () => {
