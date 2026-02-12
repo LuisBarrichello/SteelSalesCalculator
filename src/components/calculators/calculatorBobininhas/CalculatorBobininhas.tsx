@@ -1,13 +1,12 @@
-import Header from "../../common/Header";
-import Footer from "../../common/Footer";
-import { useEffect, useState } from "react";
-import DataCoil from "../../../data/weightMetroLinearCoil.json"
-import ComponentCalculationResult from "./ComponentCalculationResult";
-import InputFormBobininhas from "./InputFormBobininhas";
-import { handleCalculation } from "./HandleCalculation";
+import Header from '../../common/Header';
+import Footer from '../../common/Footer';
+import { useEffect, useState } from 'react';
+import DataCoil from '../../../data/weightMetroLinearCoil.json';
+import ComponentCalculationResult from './ComponentCalculationResult';
+import InputFormBobininhas from './InputFormBobininhas';
+import { handleCalculation } from './HandleCalculation';
 
 function CalcBobininhas() {
-    
     const [formState, setFormState] = useState({
         thickness: 0.43,
         qualityOfMaterial: 'bgl',
@@ -16,22 +15,24 @@ function CalcBobininhas() {
         quantityOfMeters: 0,
         quantityOfCoil: 1,
         cuts: {},
-        weight: [0]
+        weight: [0],
     });
 
     const [result, setResult] = useState<Result>({
-        thickness: 0, 
+        thickness: 0,
         qualityOfMaterial: '',
         hasCuts: false,
         cuts: {},
-        weight: [0], 
+        weight: [0],
         quantityOfCuts: 0,
-        quantityOfMeters: 0, 
+        quantityOfMeters: 0,
         quantityOfCoil: 0,
-        status: false
-    })
+        status: false,
+    });
 
-    const [dataCoil, setDataCoil] = useState<{ [key: string]: {thickness: string; weight: number;}[]}>({})
+    const [dataCoil, setDataCoil] = useState<{
+        [key: string]: { thickness: string; weight: number }[];
+    }>({});
 
     interface Result {
         weight: number[];
@@ -45,24 +46,30 @@ function CalcBobininhas() {
         status: boolean;
     }
 
-    const handleInputChange = (field: string, value: string | number | boolean) => {
+    const handleInputChange = (
+        field: string,
+        value: string | number | boolean,
+    ) => {
         if (field === 'hasCuts') {
             setFormState((prevState) => ({
                 ...prevState,
-                hasCuts: value === 'true'
+                hasCuts: value === 'true',
             }));
-        } else if(field.startsWith('cutWidth_')) {
+        } else if (field.startsWith('cutWidth_')) {
             const cutIndex = parseInt(field.split('_')[1], 10);
-            const newCutsWidths = { ...formState.cuts, [cutIndex]: Number(value) };
+            const newCutsWidths = {
+                ...formState.cuts,
+                [cutIndex]: Number(value),
+            };
             setFormState((prevState) => ({
                 ...prevState,
                 cuts: newCutsWidths,
-            }))
+            }));
         } else {
             setFormState((prevState) => ({ ...prevState, [field]: value }));
         }
     };
-    
+
     const handleSubmit = () => {
         if (!formState || !dataCoil) {
             console.error('Form state or data coil is null or undefined');
@@ -77,7 +84,7 @@ function CalcBobininhas() {
                 weight: weightResult as number[],
                 quantityOfMeters: formState.quantityOfMeters,
                 quantityOfCoil: formState.quantityOfCoil,
-                quantityOfCuts: formState.quantityOfCuts, 
+                quantityOfCuts: formState.quantityOfCuts,
                 hasCuts: formState.hasCuts,
                 cuts: formState.cuts,
                 status: true,
@@ -86,18 +93,20 @@ function CalcBobininhas() {
     };
 
     useEffect(() => {
-        // Simula uma requisição assíncrona para carregar os dados
         setDataCoil(DataCoil);
-        resetForm()
+        resetForm();
     }, []);
 
     useEffect(() => {
-        if(dataCoil && dataCoil[formState.qualityOfMaterial]) {
-            const selectedMaterial  = dataCoil[formState.qualityOfMaterial][0]
-            setFormState((prevState) => ({...prevState, thickness: Number(selectedMaterial.thickness)}));
+        if (dataCoil && dataCoil[formState.qualityOfMaterial]) {
+            const selectedMaterial = dataCoil[formState.qualityOfMaterial][0];
+            setFormState((prevState) => ({
+                ...prevState,
+                thickness: Number(selectedMaterial.thickness),
+            }));
         }
-    }, [formState.qualityOfMaterial])
-    
+    }, [formState.qualityOfMaterial]);
+
     const resetForm = () => {
         setFormState({
             thickness: 0.43,
@@ -109,7 +118,7 @@ function CalcBobininhas() {
             cuts: {},
             weight: [0],
         });
-    
+
         setResult((prevState) => ({
             ...prevState,
             thickness: 0.43,
@@ -122,21 +131,31 @@ function CalcBobininhas() {
             weight: [0],
             status: false,
         }));
-    }
+    };
 
     return (
-        <>
-            <Header></Header>
-            <div className="container mb-3 mt-3 min-height" >
-                {result.status === true ? 
-                    <ComponentCalculationResult result={result} resetForm={resetForm}/>
-                    :    
-                    <InputFormBobininhas formState={formState} dataCoil={dataCoil} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
-                }
-            </div>
-            <Footer></Footer>
-        </>
-    )
+        <div className="min-h-screen flex flex-col">
+            <Header />
+            <main className="flex-grow bg-gradient-to-br from-steel-50 to-primary-50 py-8">
+                <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                    {result.status === true ? (
+                        <ComponentCalculationResult
+                            result={result}
+                            resetForm={resetForm}
+                        />
+                    ) : (
+                        <InputFormBobininhas
+                            formState={formState}
+                            dataCoil={dataCoil}
+                            handleInputChange={handleInputChange}
+                            handleSubmit={handleSubmit}
+                        />
+                    )}
+                </div>
+            </main>
+            <Footer />
+        </div>
+    );
 }
 
-export default CalcBobininhas
+export default CalcBobininhas;

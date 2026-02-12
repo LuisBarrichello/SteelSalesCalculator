@@ -1,13 +1,13 @@
-import Header from "../../common/Header";
-import Footer from "../../common/Footer";
-import { useState } from "react";
-import FormCalculatorEstribos from "./FormCalculatorEstribos";
-import Result from "./Result"
-
+import Header from '../../common/Header';
+import Footer from '../../common/Footer';
+import { useState } from 'react';
+import FormCalculatorEstribos from './FormCalculatorEstribos';
+import Result from './Result';
 
 interface LengthSides {
     [key: number]: number;
 }
+
 export interface ResultInterface {
     status: boolean;
     weight: number;
@@ -34,11 +34,11 @@ function CalculatorEstribos() {
         lengthSides: { '0': 0 },
         quantityTotal: 1,
     });
-    
+
     const [result, setResult] = useState<ResultInterface>({
         status: false,
         weight: 0,
-        shape: '',  
+        shape: '',
         quantitySide: 0,
         gauge: 0,
         lengthSides: {},
@@ -53,7 +53,7 @@ function CalculatorEstribos() {
             lengthSides: {},
             quantityTotal: 1,
         });
-    
+
         setResult({
             status: false,
             weight: 0,
@@ -64,23 +64,26 @@ function CalculatorEstribos() {
             quantityTotal: 0,
         });
     };
-    
-    
+
     return (
-        <>
-            <Header></Header>
-            {result.status === true ? 
-                <Result result={result} resetForm={() => resetForm()}></Result>
-            :
-                <FormCalculatorEstribos 
-                    setResult={setResult} 
-                    setFormData={setFormData}
-                    formData={formData}
-                />
-            }
-            <Footer></Footer>
-        </>
-    )
+        <div className="min-h-screen flex flex-col">
+            <Header />
+            <main className="flex-grow bg-gradient-to-br from-steel-50 to-primary-50 py-8">
+                <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                    {result.status === true ? (
+                        <Result result={result} resetForm={() => resetForm()} />
+                    ) : (
+                        <FormCalculatorEstribos
+                            setResult={setResult}
+                            setFormData={setFormData}
+                            formData={formData}
+                        />
+                    )}
+                </div>
+            </main>
+            <Footer />
+        </div>
+    );
 }
 
-export default CalculatorEstribos
+export default CalculatorEstribos;
