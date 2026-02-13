@@ -5,6 +5,9 @@ import DataCoil from '../../../data/weightMetroLinearCoil.json';
 import ComponentCalculationResult from './ComponentCalculationResult';
 import InputFormBobininhas from './InputFormBobininhas';
 import { handleCalculation } from './HandleCalculation';
+import { useCalculationHistory } from '../../../hooks/useCalculationHistory';
+import { CalculationHistory } from '../../common/CalculationHistory';
+import { History } from 'lucide-react';
 
 function CalcBobininhas() {
     const [formState, setFormState] = useState({
@@ -33,6 +36,16 @@ function CalcBobininhas() {
     const [dataCoil, setDataCoil] = useState<{
         [key: string]: { thickness: string; weight: number }[];
     }>({});
+
+    const {
+        history,
+        addToHistory,
+        removeFromHistory,
+        clearHistory,
+        getHistoryItem,
+    } = useCalculationHistory('bobininhas');
+
+    const [isHistoryOpen, setIsHistoryOpen] = useState(false);
 
     interface Result {
         weight: number[];
@@ -78,7 +91,7 @@ function CalcBobininhas() {
 
         const weightResult = handleCalculation(formState, dataCoil);
         if (weightResult !== undefined) {
-            setResult({
+            const newResult = {
                 thickness: formState.thickness,
                 qualityOfMaterial: formState.qualityOfMaterial,
                 weight: weightResult as number[],
@@ -88,7 +101,17 @@ function CalcBobininhas() {
                 hasCuts: formState.hasCuts,
                 cuts: formState.cuts,
                 status: true,
-            });
+            };
+
+            setResult(newResult);
+
+            const totalWeight = (weightResult as number[]).reduce(
+                (acc, w) => acc + w,
+                0,
+            );
+            const summary = `${formState.quantityOfCoil} bobina(s) - ${formState.qualityOfMaterial.toUpperCase()} ${formState.thickness}mm - ${formState.quantityOfMeters}m - ${totalWeight.toFixed(2)} Kg`;
+
+            addToHistory(formState, newResult, summary);
         }
     };
 
@@ -133,11 +156,33 @@ function CalcBobininhas() {
         }));
     };
 
+    const loadCalculation = (item: any) => {
+        setFormState(item.data);
+        setResult(item.result);
+        setIsHistoryOpen(false);
+    };
+
     return (
         <div className="min-h-screen flex flex-col">
             <Header />
             <main className="flex-grow bg-gradient-to-br from-steel-50 to-primary-50 py-8">
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="mb-4 flex justify-end print:hidden">
+                        <button
+                            onClick={() => setIsHistoryOpen(true)}
+                            className="flex items-center gap-2 px-4 py-2 bg-white border-2 border-steel-300 rounded-lg hover:border-primary-500 hover:bg-primary-50 transition-all shadow-sm">
+                            <History className="w-5 h-5 text-steel-600" />
+                            <span className="font-medium text-steel-700">
+                                Histórico
+                            </span>
+                            {history.length > 0 && (
+                                <span className="px-2 py-0.5 bg-primary-600 text-white text-xs rounded-full font-bold">
+                                    {history.length}
+                                </span>
+                            )}
+                        </button>
+                    </div>
+
                     {result.status === true ? (
                         <ComponentCalculationResult
                             result={result}
@@ -154,6 +199,14 @@ function CalcBobininhas() {
                 </div>
             </main>
             <Footer />
+            <CalculationHistory
+                history={history}
+                onLoadCalculation={loadCalculation}
+                onRemoveItem={removeFromHistory}
+                onClearHistory={clearHistory}
+                isOpen={isHistoryOpen}
+                onClose={() => setIsHistoryOpen(false)}
+            />
         </div>
     );
 }
