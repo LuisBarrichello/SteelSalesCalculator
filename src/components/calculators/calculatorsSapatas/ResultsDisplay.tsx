@@ -2,7 +2,7 @@ import { FormEvent } from 'react';
 import { Grid3x3, RefreshCw, Printer, AlertCircle } from 'lucide-react';
 import { Button } from '../../common/buttons/Button';
 import ImgSapata from '../../../assets/img/sapataImgWithOutBG.png';
-import ImgEstribo from '../../../assets/img/estribo.png';
+import ImgEstribo from '../../../assets/img/estribo-quadrado.png';
 
 interface ResultsDisplayProps {
     bitola: string;

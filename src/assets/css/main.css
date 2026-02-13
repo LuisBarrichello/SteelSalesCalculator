@@ -26,6 +26,27 @@
     --color-primary-900: #1e3a8a;
 }
 
+@layer utilities {
+    .scrollbar-thin::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .scrollbar-thin::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 4px;
+    }
+    
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+        background: #94a3b8;
+        border-radius: 4px;
+    }
+    
+    .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+        background: #64748b;
+    }
+}
+
 @media print {
     .no-print {
         display: none !important;
