@@ -10,7 +10,7 @@ import {
     calculatesTotalWeightOfStirrups,
 } from './HandleCalculation';
 import ResultsDisplay from './ResultsDisplay';
-import { useCalculationHistory } from '../../../hooks/useCalculationHistory';
+import { CalculationHistoryItem, useCalculationHistory } from '../../../hooks/useCalculationHistory';
 import { CalculationHistory } from '../../common/CalculationHistory';
 import { History } from 'lucide-react';
 
@@ -61,7 +61,7 @@ function CalculatorColunas() {
         numberOfStirrupsPerColumns: 0,
     });
     const [showResult, setShowResult] = useState(false);
-    const [formData, setFormData] = useState<DataResultColunasInterface>({
+    /* const [formData, setFormData] = useState<DataResultColunasInterface>({
         numberOfColumns: 0,
         numberOfIronBars: 0,
         stirrupSpacing: 0,
@@ -78,7 +78,7 @@ function CalculatorColunas() {
             },
         },
         numberOfStirrupsPerColumns: 0,
-    });
+    }); */
 
     const { history, addToHistory, removeFromHistory, clearHistory } =
         useCalculationHistory('colunas');
@@ -103,7 +103,7 @@ function CalculatorColunas() {
         };
 
         setResult(newResult);
-        setFormData(data);
+        // setFormData(data);
         setShowResult(true);
 
         const totalWeight = totalWeightOfBars + totalWeightOfStirrups;
@@ -121,9 +121,9 @@ function CalculatorColunas() {
         setShowResult(false);
     };
 
-    const loadCalculation = (item: any) => {
-        setFormData(item.data);
-        setResult(item.result);
+    const loadCalculation = (item: CalculationHistoryItem) => {
+        // setFormData(item.data);
+        setResult(item.result as DataResultColunasInterface);
         setShowResult(true);
         setIsHistoryOpen(false);
 
@@ -136,7 +136,7 @@ function CalculatorColunas() {
     return (
         <div className="min-h-screen flex flex-col">
             <Header />
-            <main className="flex-grow bg-gradient-to-br from-steel-50 to-primary-50 py-8">
+            <main className="grow bg-linear-to-br from-steel-50 to-primary-50 py-8">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="mb-4 flex justify-end print:hidden">
                         <button

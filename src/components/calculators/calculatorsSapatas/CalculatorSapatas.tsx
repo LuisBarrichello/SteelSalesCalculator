@@ -1,149 +1,198 @@
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import Header from '../../common/Header';
 import Footer from '../../common/Footer';
 import FormCalculatorSapatas from './FormCalculatorSapatas';
 import ResultsDisplay from './ResultsDisplay';
-import { useCalculationHistory } from '../../../hooks/useCalculationHistory';
+import {
+    useCalculationHistory,
+    CalculationHistoryItem,
+} from '../../../hooks/useCalculationHistory';
 import { CalculationHistory } from '../../common/CalculationHistory';
 import { History } from 'lucide-react';
 
-function CalcSapatas() {
-    const [largura, setLargura] = useState(0);
-    const [comprimento, setComprimento] = useState(0);
-    const [altura, setAltura] = useState(0);
-    const [quantidadeDeFerros, setQuantidadeDeFerros] = useState(0);
-    const [quantidadeDeSapatas, setQuantidadeDeSapatas] = useState(0);
-    const [bitola, setBitola] = useState('4.2');
-    const [result, setResult] = useState(false);
+export interface SapatasFormData {
+    width: number;
+    length: number;
+    height: number;
+    ironBarsPerSapata: number;
+    quantityOfSapatas: number;
+    gauge: number;
+}
 
-    // Hook de histórico
+export interface SapatasResult {
+    weightStirrups: number;
+    weightStirrupsLess2: number;
+    totalWeight: number;
+    status: boolean;
+}
+
+const REBAR_WEIGHTS: { [key: number]: number } = {
+    4.2: 0.115,
+    5: 0.157,
+    6.3: 0.25,
+    8: 0.398,
+    10: 0.628,
+    12.5: 0.985,
+    16: 1.61,
+    20: 2.55,
+};
+
+const OVERLAPS: { [key: number]: number } = {
+    4.2: 5.5,
+    5: 5.5,
+    6.3: 6,
+    8: 8,
+    10: 10,
+    12.5: 12,
+    16: 16,
+    20: 20,
+};
+
+function CalculatorSapatas() {
+    const initialFormData: SapatasFormData = {
+        width: 0,
+        length: 0,
+        height: 0,
+        ironBarsPerSapata: 0,
+        quantityOfSapatas: 0,
+        gauge: 4.2,
+    };
+
+    const [formData, setFormData] = useState<SapatasFormData>(initialFormData);
+
+    const [results, setResults] = useState<SapatasResult>({
+        weightStirrups: 0,
+        weightStirrupsLess2: 0,
+        totalWeight: 0,
+        status: false,
+    });
+
     const { history, addToHistory, removeFromHistory, clearHistory } =
         useCalculationHistory('sapatas');
 
     const [isHistoryOpen, setIsHistoryOpen] = useState(false);
 
-    const pesos: { [key: string]: number } = {
-        '4.2': 0.115,
-        '5': 0.157,
-        '6.3': 0.25,
-        '8': 0.398,
-        '10': 0.628,
-        '12.5': 0.985,
-        '16': 1.61,
-        '20': 2.55,
+    const handleInputChange = (field: keyof SapatasFormData, value: number) => {
+        setFormData((prev) => ({
+            ...prev,
+            [field]: value,
+        }));
     };
 
-    const transpasses: { [key: string]: number } = {
-        '4.2': 5.5,
-        '5': 5.5,
-        '6.3': 6,
-        '8': 8,
-        '10': 10,
-        '12.5': 12,
-        '16': 16,
-        '20': 20,
-    };
-
-    const handleSubmit = (event: FormEvent) => {
-        event.preventDefault();
-        setResult(!result);
-
-        if (!result) {
-            // Salvando no histórico
-            const weightEstribos = calculatorWeightEstribos(
-                largura,
-                altura,
-                bitola,
-                quantidadeDeFerros,
-            );
-            const weightEstribosLess2 = calculatorWeightEstribos(
-                comprimento,
-                altura - 2,
-                bitola,
-                quantidadeDeFerros,
-            );
-            const totalWeight = weightEstribos + weightEstribosLess2;
-
-            const formData = {
-                largura,
-                comprimento,
-                altura,
-                quantidadeDeFerros,
-                quantidadeDeSapatas,
-                bitola,
-            };
-
-            const resultData = {
-                weightEstribos,
-                weightEstribosLess2,
-                totalWeight,
-            };
-
-            const summary = `${quantidadeDeSapatas} sapata(s) - ${largura}x${comprimento}x${altura}cm - ${quantidadeDeFerros} ferros - Ø${bitola}mm - ${totalWeight.toFixed(2)} Kg`;
-
-            addToHistory(formData, resultData, summary);
-        }
-    };
-
-    const calculatorWeightEstribos = (
-        lado1: number,
-        lado2: number,
-        bitolaEstribo: string,
-        quantidadeFerrosParaEstribo: number,
+    const calculateStirrupWeight = (
+        side1: number,
+        side2: number,
+        gauge: number,
+        barsPerStirrup: number,
+        qtySapatas: number,
     ): number => {
-        const quantidadeEstribosPorSapata = quantidadeFerrosParaEstribo / 2;
-        const totalLength: number =
-            lado1 * 2 + lado2 * 2 + transpasses[bitolaEstribo] * 2;
-        const weigth: number =
+        const stirrupsPerSapata = barsPerStirrup / 2;
+        const totalLength = side1 * 2 + side2 * 2 + OVERLAPS[gauge] * 2;
+
+        const weight =
             (totalLength *
-                pesos[bitolaEstribo] *
-                quantidadeEstribosPorSapata *
-                quantidadeDeSapatas) /
+                REBAR_WEIGHTS[gauge] *
+                stirrupsPerSapata *
+                qtySapatas) /
             100;
 
-        return parseFloat(weigth.toFixed(2));
+        return parseFloat(weight.toFixed(2));
     };
 
-    const weightEstribos = calculatorWeightEstribos(
-        largura,
-        altura,
-        bitola,
-        quantidadeDeFerros,
-    );
-    const weightEstribosLess2 = calculatorWeightEstribos(
-        comprimento,
-        altura - 2,
-        bitola,
-        quantidadeDeFerros,
-    );
+    const handleSubmit = () => {
+        const {
+            width,
+            length,
+            height,
+            gauge,
+            ironBarsPerSapata,
+            quantityOfSapatas,
+        } = formData;
 
-    const returnForm = (event: FormEvent) => {
-        event.preventDefault();
-        setResult(!result);
+        if (
+            width <= 0 ||
+            length <= 0 ||
+            height <= 0 ||
+            ironBarsPerSapata <= 0 ||
+            quantityOfSapatas <= 0
+        ) {
+            return;
+        }
+
+        const weightStirrups = calculateStirrupWeight(
+            width,
+            height,
+            gauge,
+            ironBarsPerSapata,
+            quantityOfSapatas,
+        );
+
+        const weightStirrupsLess2 = calculateStirrupWeight(
+            length,
+            height - 2,
+            gauge,
+            ironBarsPerSapata,
+            quantityOfSapatas,
+        );
+
+        const totalWeight = weightStirrups + weightStirrupsLess2;
+
+        const newResult: SapatasResult = {
+            weightStirrups,
+            weightStirrupsLess2,
+            totalWeight,
+            status: true,
+        };
+
+        setResults(newResult);
+
+        const summary = `${quantityOfSapatas} sapata(s) - ${width}x${length}x${height}cm - ${ironBarsPerSapata} ferros - Ø${gauge}mm - ${totalWeight.toFixed(2)} Kg`;
+
+        addToHistory(formData, newResult, summary);
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    // Carregar cálculo do histórico
-    const loadCalculation = (item: any) => {
-        const data = item.data;
-        setLargura(data.largura);
-        setComprimento(data.comprimento);
-        setAltura(data.altura);
-        setQuantidadeDeFerros(data.quantidadeDeFerros);
-        setQuantidadeDeSapatas(data.quantidadeDeSapatas);
-        setBitola(data.bitola);
-        setResult(true);
-        setIsHistoryOpen(false);
+    const resetForm = () => {
+        setFormData(initialFormData);
+        setResults({
+            weightStirrups: 0,
+            weightStirrupsLess2: 0,
+            totalWeight: 0,
+            status: false,
+        }); 
+    };
 
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
+    const loadCalculation = (item: CalculationHistoryItem) => {
+        const data = item.data as any;
+
+        setFormData({
+            width: data.width,
+            length: data.length,
+            height: data.height,
+            ironBarsPerSapata:
+                data.ironBarsPerSapata,
+            quantityOfSapatas:
+                data.quantityOfSapatas,
+            gauge: Number(data.gauge),
         });
+
+        const res = item.result as SapatasResult;
+        setResults({
+            weightStirrups: res.weightStirrups,
+            weightStirrupsLess2: res.weightStirrupsLess2,
+            totalWeight: res.totalWeight,
+            status: true,
+        });
+
+        setIsHistoryOpen(false);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     return (
         <div className="min-h-screen flex flex-col">
             <Header />
-            <main className="flex-grow bg-gradient-to-br from-steel-50 to-primary-50 py-8">
+            <main className="grow bg-linear-to-br from-steel-50 to-primary-50 py-8">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="mb-4 flex justify-end print:hidden">
                         <button
@@ -161,32 +210,16 @@ function CalcSapatas() {
                         </button>
                     </div>
 
-                    {result === true ? (
+                    {results.status ? (
                         <ResultsDisplay
-                            bitola={bitola}
-                            quantidadeDeFerros={quantidadeDeFerros}
-                            quantidadeDeSapatas={quantidadeDeSapatas}
-                            largura={largura}
-                            altura={altura}
-                            comprimento={comprimento}
-                            weightEstribos={weightEstribos}
-                            weightEstribosLess2={weightEstribosLess2}
-                            returnForm={returnForm}
+                            formData={formData}
+                            results={results}
+                            resetForm={resetForm}
                         />
                     ) : (
                         <FormCalculatorSapatas
-                            largura={largura}
-                            setLargura={setLargura}
-                            comprimento={comprimento}
-                            setComprimento={setComprimento}
-                            altura={altura}
-                            setAltura={setAltura}
-                            quantidadeDeFerros={quantidadeDeFerros}
-                            setQuantidadeDeFerros={setQuantidadeDeFerros}
-                            quantidadeDeSapatas={quantidadeDeSapatas}
-                            setQuantidadeDeSapatas={setQuantidadeDeSapatas}
-                            bitola={bitola}
-                            setBitola={setBitola}
+                            formData={formData}
+                            handleInputChange={handleInputChange}
                             handleSubmit={handleSubmit}
                         />
                     )}
@@ -206,4 +239,4 @@ function CalcSapatas() {
     );
 }
 
-export default CalcSapatas;
+export default CalculatorSapatas;

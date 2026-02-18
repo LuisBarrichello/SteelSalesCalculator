@@ -2,41 +2,27 @@ import { FormEvent } from 'react';
 import { Grid3x3, Calculator } from 'lucide-react';
 import { FormInput } from '../../common/forms/FormInput';
 import { Button } from '../../common/buttons/Button';
+import { SapatasFormData } from './CalculatorSapatas';
 
-interface FormCalculatorSapatasProps {
-    largura: number;
-    setLargura: (value: number) => void;
-    comprimento: number;
-    setComprimento: (value: number) => void;
-    altura: number;
-    setAltura: (value: number) => void;
-    quantidadeDeFerros: number;
-    setQuantidadeDeFerros: (value: number) => void;
-    quantidadeDeSapatas: number;
-    setQuantidadeDeSapatas: (value: number) => void;
-    bitola: string;
-    setBitola: (value: string) => void;
-    handleSubmit: (event: FormEvent) => void;
+interface FormProps {
+    formData: SapatasFormData;
+    handleInputChange: (field: keyof SapatasFormData, value: number) => void;
+    handleSubmit: () => void;
 }
 
 function FormCalculatorSapatas({
-    largura,
-    setLargura,
-    comprimento,
-    setComprimento,
-    altura,
-    setAltura,
-    quantidadeDeFerros,
-    setQuantidadeDeFerros,
-    quantidadeDeSapatas,
-    setQuantidadeDeSapatas,
-    bitola,
-    setBitola,
+    formData,
+    handleInputChange,
     handleSubmit,
-}: FormCalculatorSapatasProps) {
+}: FormProps) {
+    const onSubmit = (e: FormEvent) => {
+        e.preventDefault();
+        handleSubmit();
+    };
+
     return (
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-            <div className="bg-gradient-to-r from-violet-600 to-purple-700 px-6 py-8 sm:px-8">
+            <div className="bg-linear-to-r from-violet-600 to-purple-700 px-6 py-8 sm:px-8">
                 <div className="flex items-center gap-3">
                     <div className="p-3 bg-white/10 rounded-xl backdrop-blur-sm">
                         <Grid3x3 className="w-8 h-8 text-white" />
@@ -52,7 +38,7 @@ function FormCalculatorSapatas({
                 </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-6">
+            <form onSubmit={onSubmit} className="p-6 sm:p-8 space-y-6">
                 <div>
                     <h3 className="text-lg font-semibold text-steel-900 mb-4 flex items-center gap-2">
                         <div className="w-1 h-6 bg-violet-500 rounded-full"></div>
@@ -62,30 +48,36 @@ function FormCalculatorSapatas({
                         <FormInput
                             label="Largura (cm)"
                             type="number"
-                            value={largura}
-                            onChange={(value) => setLargura(Number(value))}
+                            value={formData.width}
+                            onChange={(val) =>
+                                handleInputChange('width', Number(val))
+                            }
                             min={1}
-                            error={largura <= 0}
+                            error={formData.width < 0}
                             errorMessage="Deve ser maior que zero"
                             required
                         />
                         <FormInput
                             label="Comprimento (cm)"
                             type="number"
-                            value={comprimento}
-                            onChange={(value) => setComprimento(Number(value))}
+                            value={formData.length}
+                            onChange={(val) =>
+                                handleInputChange('length', Number(val))
+                            }
                             min={1}
-                            error={comprimento <= 0}
+                            error={formData.length < 0}
                             errorMessage="Deve ser maior que zero"
                             required
                         />
                         <FormInput
                             label="Altura (cm)"
                             type="number"
-                            value={altura}
-                            onChange={(value) => setAltura(Number(value))}
+                            value={formData.height}
+                            onChange={(val) =>
+                                handleInputChange('height', Number(val))
+                            }
                             min={1}
-                            error={altura <= 0}
+                            error={formData.height < 0}
                             errorMessage="Deve ser maior que zero"
                             required
                         />
@@ -101,32 +93,40 @@ function FormCalculatorSapatas({
                         <FormInput
                             label="Quantidade de Sapatas"
                             type="number"
-                            value={quantidadeDeSapatas}
-                            onChange={(value) =>
-                                setQuantidadeDeSapatas(Number(value))
+                            value={formData.quantityOfSapatas}
+                            onChange={(val) =>
+                                handleInputChange(
+                                    'quantityOfSapatas',
+                                    Number(val),
+                                )
                             }
                             min={1}
-                            error={quantidadeDeSapatas <= 0}
+                            error={formData.quantityOfSapatas < 0}
                             errorMessage="Deve ser maior que zero"
                             required
                         />
                         <FormInput
                             label="Ferros por Sapata"
                             type="number"
-                            value={quantidadeDeFerros}
-                            onChange={(value) =>
-                                setQuantidadeDeFerros(Number(value))
+                            value={formData.ironBarsPerSapata}
+                            onChange={(val) =>
+                                handleInputChange(
+                                    'ironBarsPerSapata',
+                                    Number(val),
+                                )
                             }
                             min={1}
-                            error={quantidadeDeFerros <= 0}
+                            error={formData.ironBarsPerSapata < 0}
                             errorMessage="Deve ser maior que zero"
                             required
                         />
                         <FormInput
                             label="Bitola (mm)"
                             type="select"
-                            value={bitola}
-                            onChange={(value) => setBitola(value)}
+                            value={formData.gauge}
+                            onChange={(val) =>
+                                handleInputChange('gauge', Number(val))
+                            }
                             required>
                             <option value="4.2">4.2 mm</option>
                             <option value="5">5.0 mm</option>
@@ -149,7 +149,9 @@ function FormCalculatorSapatas({
                             </span>
                         </div>
                         <p className="text-2xl font-bold text-violet-700">
-                            {quantidadeDeFerros > 0 ? quantidadeDeFerros : '--'}
+                            {formData.ironBarsPerSapata > 0
+                                ? formData.ironBarsPerSapata
+                                : '--'}
                         </p>
                     </div>
                     <div className="bg-violet-50 rounded-lg p-4 border border-violet-200">
@@ -160,8 +162,10 @@ function FormCalculatorSapatas({
                             </span>
                         </div>
                         <p className="text-2xl font-bold text-violet-700">
-                            {quantidadeDeFerros > 0 && quantidadeDeSapatas > 0
-                                ? quantidadeDeFerros * quantidadeDeSapatas
+                            {formData.ironBarsPerSapata > 0 &&
+                            formData.quantityOfSapatas > 0
+                                ? formData.ironBarsPerSapata *
+                                formData.quantityOfSapatas
                                 : '--'}
                         </p>
                     </div>

@@ -43,9 +43,20 @@ function InputFormBobininhas({
         setWidthCoil(totalWidth);
     }, [formState.cuts]);
 
+    const getThicknessValue = () => {
+        if (!dataCoil || !dataCoil[formState.qualityOfMaterial]) return '';
+
+        const materialData = dataCoil[formState.qualityOfMaterial];
+        const match = materialData.find(
+            (item) => Number(item.thickness) === formState.thickness,
+        );
+
+        return match ? match.thickness : formState.thickness.toString();
+    };
+
     return (
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-            <div className="bg-gradient-to-r from-primary-600 to-primary-700 px-6 py-8 sm:px-8">
+            <div className="bg-linear-to-r from-primary-600 to-primary-700 px-6 py-8 sm:px-8">
                 <div className="flex items-center gap-3">
                     <div className="p-3 bg-white/10 rounded-xl backdrop-blur-sm">
                         <Package className="w-8 h-8 text-white" />
@@ -83,7 +94,7 @@ function InputFormBobininhas({
                 <FormInput
                     label="Espessura da Chapa"
                     type="select"
-                    value={formState.thickness}
+                    value={getThicknessValue()}
                     onChange={(value) =>
                         handleInputChange('thickness', Number(value))
                     }
@@ -137,6 +148,7 @@ function InputFormBobininhas({
                                 type="radio"
                                 name="hasCuts"
                                 value="true"
+                                checked={String(formState.hasCuts) === 'true'}
                                 onChange={(e) =>
                                     handleInputChange('hasCuts', e.target.value)
                                 }
@@ -149,6 +161,7 @@ function InputFormBobininhas({
                                 type="radio"
                                 name="hasCuts"
                                 value="false"
+                                checked={String(formState.hasCuts) === 'false'}
                                 onChange={(e) =>
                                     handleInputChange('hasCuts', e.target.value)
                                 }

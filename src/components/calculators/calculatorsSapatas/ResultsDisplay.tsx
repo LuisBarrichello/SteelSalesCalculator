@@ -1,38 +1,33 @@
-import { FormEvent } from 'react';
 import { Grid3x3, RefreshCw, Printer, AlertCircle } from 'lucide-react';
 import { Button } from '../../common/buttons/Button';
 import ImgSapata from '../../../assets/img/sapataImgWithOutBG.png';
 import ImgEstribo from '../../../assets/img/estribo-quadrado.png';
+import { SapatasFormData, SapatasResult } from './CalculatorSapatas';
 
 interface ResultsDisplayProps {
-    bitola: string;
-    quantidadeDeFerros: number;
-    quantidadeDeSapatas: number;
-    largura: number;
-    altura: number;
-    comprimento: number;
-    weightEstribos: number;
-    weightEstribosLess2: number;
-    returnForm: (event: FormEvent) => void;
+    formData: SapatasFormData;
+    results: SapatasResult;
+    resetForm: () => void;
 }
 
-function ResultsDisplay({
-    bitola,
-    quantidadeDeFerros,
-    quantidadeDeSapatas,
-    largura,
-    altura,
-    comprimento,
-    weightEstribos,
-    weightEstribosLess2,
-    returnForm,
-}: ResultsDisplayProps) {
-    const totalWeight = weightEstribos + weightEstribosLess2;
+function ResultsDisplay({ formData, results, resetForm }: ResultsDisplayProps) {
+    const {
+        gauge,
+        ironBarsPerSapata,
+        quantityOfSapatas,
+        width,
+        height,
+        length,
+    } = formData;
+    const { weightStirrups, weightStirrupsLess2, totalWeight } = results;
+
+    const stirrupsPerType = ironBarsPerSapata / 2;
+    const totalStirrupsPerType = stirrupsPerType * quantityOfSapatas;
 
     return (
         <div className="space-y-6">
             <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-                <div className="bg-gradient-to-r from-green-600 to-emerald-700 px-6 py-8 sm:px-8">
+                <div className="bg-linear-to-r from-green-600 to-emerald-700 px-6 py-8 sm:px-8">
                     <div className="flex items-center gap-3">
                         <div className="p-3 bg-white/10 rounded-xl backdrop-blur-sm">
                             <Grid3x3 className="w-8 h-8 text-white" />
@@ -83,25 +78,24 @@ function ResultsDisplay({
                                     </td>
                                     <td className="py-4 px-4">
                                         <span className="px-2 py-1 bg-violet-100 text-violet-700 rounded-md text-sm font-medium">
-                                            {bitola} mm
+                                            {gauge} mm
                                         </span>
                                     </td>
                                     <td className="py-4 px-4 text-steel-900 font-medium">
-                                        {quantidadeDeFerros / 2}
+                                        {stirrupsPerType}
                                     </td>
                                     <td className="py-4 px-4 text-steel-900">
-                                        {(quantidadeDeFerros / 2) *
-                                            quantidadeDeSapatas}
+                                        {totalStirrupsPerType}
                                     </td>
                                     <td className="py-4 px-4 text-steel-900">
-                                        {largura} cm
+                                        {width} cm
                                     </td>
                                     <td className="py-4 px-4 text-steel-900">
-                                        {altura} cm
+                                        {height} cm
                                     </td>
                                     <td className="py-4 px-4 text-right">
                                         <span className="font-semibold text-violet-600">
-                                            {weightEstribos.toFixed(2)} Kg
+                                            {weightStirrups.toFixed(2)} Kg
                                         </span>
                                     </td>
                                 </tr>
@@ -111,25 +105,24 @@ function ResultsDisplay({
                                     </td>
                                     <td className="py-4 px-4">
                                         <span className="px-2 py-1 bg-violet-100 text-violet-700 rounded-md text-sm font-medium">
-                                            {bitola} mm
+                                            {gauge} mm
                                         </span>
                                     </td>
                                     <td className="py-4 px-4 text-steel-900 font-medium">
-                                        {quantidadeDeFerros / 2}
+                                        {stirrupsPerType}
                                     </td>
                                     <td className="py-4 px-4 text-steel-900">
-                                        {(quantidadeDeFerros / 2) *
-                                            quantidadeDeSapatas}
+                                        {totalStirrupsPerType}
                                     </td>
                                     <td className="py-4 px-4 text-steel-900">
-                                        {comprimento} cm
+                                        {length} cm
                                     </td>
                                     <td className="py-4 px-4 text-steel-900">
-                                        {altura - 2} cm
+                                        {height - 2} cm
                                     </td>
                                     <td className="py-4 px-4 text-right">
                                         <span className="font-semibold text-violet-600">
-                                            {weightEstribosLess2.toFixed(2)} Kg
+                                            {weightStirrupsLess2.toFixed(2)} Kg
                                         </span>
                                     </td>
                                 </tr>
@@ -140,11 +133,10 @@ function ResultsDisplay({
                                         Total
                                     </td>
                                     <td className="py-4 px-4 text-steel-900">
-                                        {quantidadeDeFerros}
+                                        {ironBarsPerSapata}
                                     </td>
                                     <td className="py-4 px-4 text-steel-900">
-                                        {quantidadeDeFerros *
-                                            quantidadeDeSapatas}
+                                        {ironBarsPerSapata * quantityOfSapatas}
                                     </td>
                                     <td
                                         colSpan={2}
@@ -163,14 +155,14 @@ function ResultsDisplay({
                                 Quantidade Total de Sapatas:
                             </span>
                             <span className="text-3xl font-bold text-violet-700">
-                                {quantidadeDeSapatas}
+                                {quantityOfSapatas}
                             </span>
                         </div>
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-4 mt-8">
                         <Button
-                            onClick={() => returnForm({} as FormEvent)}
+                            onClick={resetForm}
                             variant="primary"
                             size="lg"
                             icon={<RefreshCw className="w-5 h-5" />}
@@ -222,7 +214,7 @@ function ResultsDisplay({
                                                 Altura:
                                             </span>
                                             <span className="font-bold text-steel-900">
-                                                {altura} cm
+                                                {height} cm
                                             </span>
                                         </div>
                                         <div className="flex items-center gap-2">
@@ -230,7 +222,7 @@ function ResultsDisplay({
                                                 Largura:
                                             </span>
                                             <span className="font-bold text-steel-900">
-                                                {largura} cm
+                                                {width} cm
                                             </span>
                                         </div>
                                     </div>
@@ -253,7 +245,7 @@ function ResultsDisplay({
                                                 Altura:
                                             </span>
                                             <span className="font-bold text-steel-900">
-                                                {altura - 2} cm
+                                                {height - 2} cm
                                             </span>
                                         </div>
                                         <div className="flex items-center gap-2">
@@ -261,7 +253,7 @@ function ResultsDisplay({
                                                 Largura:
                                             </span>
                                             <span className="font-bold text-steel-900">
-                                                {comprimento} cm
+                                                {length} cm
                                             </span>
                                         </div>
                                     </div>
@@ -275,7 +267,7 @@ function ResultsDisplay({
             <div className="print:hidden">
                 <div className="bg-amber-50 border-l-4 border-amber-500 rounded-lg p-6">
                     <div className="flex gap-3">
-                        <AlertCircle className="w-6 h-6 text-amber-600 flex-shrink-0 mt-0.5" />
+                        <AlertCircle className="w-6 h-6 text-amber-600 shrink-0 mt-0.5" />
                         <div>
                             <h4 className="font-semibold text-amber-900 mb-2">
                                 Atenção

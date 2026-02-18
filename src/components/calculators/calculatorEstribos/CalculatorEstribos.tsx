@@ -3,7 +3,7 @@ import Footer from '../../common/Footer';
 import { useState } from 'react';
 import FormCalculatorEstribos from './FormCalculatorEstribos';
 import Result from './Result';
-import { useCalculationHistory } from '../../../hooks/useCalculationHistory';
+import { CalculationHistoryItem, useCalculationHistory } from '../../../hooks/useCalculationHistory';
 import { CalculationHistory } from '../../common/CalculationHistory';
 import { History } from 'lucide-react';
 
@@ -48,7 +48,6 @@ function CalculatorEstribos() {
         quantityTotal: 0,
     });
 
-    // Hook de histórico
     const { history, addToHistory, removeFromHistory, clearHistory } =
         useCalculationHistory('estribos');
 
@@ -77,7 +76,6 @@ function CalculatorEstribos() {
     const handleResultSet = (newResult: ResultInterface) => {
         setResult(newResult);
 
-        // Adicionar ao histórico
         const shapeLabels: { [key: string]: string } = {
             square: 'Quadrado',
             rectangular: 'Retangular',
@@ -85,15 +83,22 @@ function CalculatorEstribos() {
             circular: 'Circular',
         };
 
+        const dataToSave: FormData = {
+            shape: newResult.shape,
+            quantitySide: newResult.quantitySide,
+            gauge: newResult.gauge,
+            lengthSides: newResult.lengthSides,
+            quantityTotal: newResult.quantityTotal
+        };
+
         const summary = `${newResult.quantityTotal} estribo(s) ${shapeLabels[newResult.shape]} - Ø${newResult.gauge}mm - ${newResult.weight} Kg`;
 
-        addToHistory(formData, newResult, summary);
+        addToHistory(dataToSave, newResult, summary);
     };
 
-    // Carregar cálculo do histórico
-    const loadCalculation = (item: any) => {
-        setFormData(item.data);
-        setResult(item.result);
+    const loadCalculation = (item: CalculationHistoryItem) => {
+        setFormData(item.data as FormData);
+        setResult(item.result as ResultInterface);
         setIsHistoryOpen(false);
 
         window.scrollTo({
@@ -105,7 +110,7 @@ function CalculatorEstribos() {
     return (
         <div className="min-h-screen flex flex-col">
             <Header />
-            <main className="flex-grow bg-gradient-to-br from-steel-50 to-primary-50 py-8">
+            <main className="grow bg-linear-to-br from-steel-50 to-primary-50 py-8">
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="mb-4 flex justify-end print:hidden">
                         <button

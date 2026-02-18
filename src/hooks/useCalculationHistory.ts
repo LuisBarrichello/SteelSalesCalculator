@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 
 export interface CalculationData {
-    [key: string]: string | number | boolean;
+    [key: string]: any;
 }
 
 export interface CalculationResult {
-    [key: string]: string | number | boolean;
+    [key: string]: any;
 }
 
 export interface CalculationHistoryItem {
@@ -18,7 +18,7 @@ export interface CalculationHistoryItem {
     summary: string;
 }
 
-const MAX_HISTORY_ITEMS = 10;
+const MAX_HISTORY_ITEMS = 20;
 
 export function useCalculationHistory(
     calculatorType: 'bobininhas' | 'sapatas' | 'estribos' | 'colunas',
