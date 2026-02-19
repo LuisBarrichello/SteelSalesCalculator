@@ -5,6 +5,7 @@ import {
     Grid3x3,
     Square,
     SquaresExclude,
+    History,
 } from 'lucide-react';
 import Header from './common/Header';
 import Footer from './common/Footer';
@@ -45,12 +46,12 @@ function Home() {
         <div className="min-h-screen flex flex-col">
             <Header />
 
-            <main className="flex-grow">
+            <main className="grow">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
                     {/* Hero Section */}
                     <div className="text-center mb-16">
                         <div className="flex justify-center mb-6">
-                            <div className="p-4 bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl shadow-lg">
+                            <div className="p-4 bg-linear-to-br from-primary-500 to-primary-700 rounded-2xl shadow-lg">
                                 <Calculator className="w-12 h-12 text-white" />
                             </div>
                         </div>
@@ -95,6 +96,17 @@ function Home() {
                                     Por cálculo
                                 </p>
                             </div>
+                            <div className="px-6 py-3 bg-white rounded-lg shadow-sm border border-steel-200">
+                                <p className="text-sm text-steel-600">
+                                    Histórico
+                                </p>
+                                <p className="text-2xl font-bold text-primary-600">
+                                    20
+                                </p>
+                                <p className="text-xs text-steel-500">
+                                    Últimos salvos
+                                </p>
+                            </div>
                         </div>
                     </div>
 
@@ -109,13 +121,13 @@ function Home() {
                                     className="group relative bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
                                     {/* Gradient Header */}
                                     <div
-                                        className={`h-2 bg-gradient-to-r ${calc.color}`}
+                                        className={`h-2 bg-linear-to-r ${calc.color}`}
                                     />
 
                                     <div className="p-6">
                                         <div className="mb-4">
                                             <div
-                                                className={`inline-flex p-3 rounded-lg bg-gradient-to-br ${calc.color} bg-opacity-10`}>
+                                                className={`inline-flex p-3 rounded-lg bg-linear-to-br ${calc.color} bg-opacity-10`}>
                                                 <Icon className="w-6 h-6 text-steel-700" />
                                             </div>
                                         </div>
@@ -149,7 +161,7 @@ function Home() {
                     </div>
 
                     {/* Features Section */}
-                    <div className="mt-20 grid md:grid-cols-3 gap-8">
+                    <div className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         <div className="text-center">
                             <div className="inline-flex p-4 bg-primary-100 rounded-full mb-4">
                                 <svg
@@ -214,6 +226,19 @@ function Home() {
                             </h3>
                             <p className="text-steel-600">
                                 Interface simples para resultados imediatos
+                            </p>
+                        </div>
+
+                        <div className="text-center">
+                            <div className="inline-flex p-4 bg-primary-100 rounded-full mb-4">
+                                <History className="w-8 h-8 text-primary-600" />
+                            </div>
+                            <h3 className="text-lg font-semibold text-steel-900 mb-2">
+                                Histórico Automático
+                            </h3>
+                            <p className="text-steel-600">
+                                Os seus últimos 20 cálculos ficam salvos
+                                localmente para consulta rápida.
                             </p>
                         </div>
                     </div>
