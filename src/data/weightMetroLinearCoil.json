@@ -7,24 +7,24 @@
     ],
     "azul": [
         {"thickness": "0.43", "weight": 3.95},
-        {"thickness": "0.50", "weight": 4.70}
+        {"thickness": "0.50", "weight": 4.65}
     ],
     "branca": [
-        {"thickness": "0.43", "weight": 3.95},
+        {"thickness": "0.43", "weight": 4},
         {"thickness": "0.50", "weight": 4.65}
     ],
     "cinza": [
-        {"thickness": "0.43", "weight": 4.10}
+        {"thickness": "0.43", "weight": 4}
     ],
     "vermelha": [
-        {"thickness": "0.43", "weight": 4.06}
+        {"thickness": "0.43", "weight": 4}
     ],
     "preta": [
-        {"thickness": "0.43", "weight": 4.03},
-        {"thickness": "0.50", "weight": 4.62}
+        {"thickness": "0.43", "weight": 4},
+        {"thickness": "0.50", "weight": 4.65}
     ],
     "ceramica": [
-        {"thickness": "0.43", "weight": 3.97}
+        {"thickness": "0.43", "weight": 4}
     ],
     "mini": [
         {"thickness": "0.43", "weight": 3.96},

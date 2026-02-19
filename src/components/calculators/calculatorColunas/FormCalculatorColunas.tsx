@@ -1,4 +1,12 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
+import {
+    Columns,
+    Square,
+    RectangleHorizontal,
+    Triangle,
+    Circle,
+} from 'lucide-react';
+import { Button } from '../../common/buttons/Button';
 
 interface dataColunas {
     numberOfColumns: number;
@@ -44,321 +52,377 @@ const FormCalculatorColunas = ({ onSubmit }: FormCalculatorColunasProps) => {
         onSubmit(data);
     };
 
+    const shapeOptions = [
+        { value: 'square', label: 'Quadrado', icon: Square },
+        {
+            value: 'rectangular',
+            label: 'Retangular',
+            icon: RectangleHorizontal,
+        },
+        { value: 'triangular', label: 'Triangular', icon: Triangle },
+        { value: 'circular', label: 'Circular', icon: Circle },
+    ];
+
     return (
-        <>
-            <section className="container min-height">
-                <h1 className="mb-4 mt-4 text-center">Cálculo de Colunas</h1>
-                <form onSubmit={handleSubmit(handleFormSubmit)}>
-                    <div className="form-floating mb-3 mt-3">
-                        <input
-                            type="number"
-                            className={`form-control ${
-                                errors.numberOfColumns ? 'is-invalid' : ''
-                            }`}
-                            {...register('numberOfColumns', {
-                                required: true,
-                                min: 1,
-                            })}></input>
-                        <label htmlFor="">Qual quantidade de colunas?</label>
-                        {errors.numberOfColumns && (
-                            <div className="invalid-feedback">
-                                Campo obrigatório e deve ser maior que 0
-                            </div>
-                        )}
+        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <div className="bg-gradient-to-r from-emerald-600 to-teal-700 px-6 py-8 sm:px-8">
+                <div className="flex items-center gap-3">
+                    <div className="p-3 bg-white/10 rounded-xl backdrop-blur-sm">
+                        <Columns className="w-8 h-8 text-white" />
                     </div>
+                    <div>
+                        <h1 className="text-3xl font-bold text-white">
+                            Cálculo de Colunas
+                        </h1>
+                        <p className="text-emerald-100 mt-1">
+                            Dimensionamento completo de colunas estruturais
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-                    <div className="form-floating mb-3 mt-3">
-                        <input
-                            type="number"
-                            className={`form-control ${
-                                errors.numberOfIronBars ? 'is-invalid' : ''
-                            }`}
-                            {...register('numberOfIronBars', {
-                                required: true,
-                                min: 3,
-                            })}></input>
-                        <label htmlFor="">
-                            Qual quantidade de ferros por colunas?
+            <form
+                onSubmit={handleSubmit(handleFormSubmit)}
+                className="p-6 sm:p-8 space-y-8">
+                <div>
+                    <h3 className="text-lg font-semibold text-steel-900 mb-4 flex items-center gap-2">
+                        <div className="w-1 h-6 bg-emerald-500 rounded-full"></div>
+                        Configuração das Colunas
+                    </h3>
+                    <div className="grid md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                            <label className="block text-sm font-medium text-steel-700">
+                                Quantidade de Colunas{' '}
+                                <span className="text-red-500">*</span>
+                            </label>
+                            <input
+                                type="number"
+                                className={`w-full px-4 py-3 rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent ${
+                                    errors.numberOfColumns
+                                        ? 'border-red-300'
+                                        : 'border-steel-200'
+                                }`}
+                                {...register('numberOfColumns', {
+                                    required: true,
+                                    min: 1,
+                                })}
+                            />
+                            {errors.numberOfColumns && (
+                                <p className="text-sm text-red-600">
+                                    Deve ser maior que 0
+                                </p>
+                            )}
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="block text-sm font-medium text-steel-700">
+                                Ferros por Coluna{' '}
+                                <span className="text-red-500">*</span>
+                            </label>
+                            <input
+                                type="number"
+                                className={`w-full px-4 py-3 rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent ${
+                                    errors.numberOfIronBars
+                                        ? 'border-red-300'
+                                        : 'border-steel-200'
+                                }`}
+                                {...register('numberOfIronBars', {
+                                    required: true,
+                                    min: 3,
+                                })}
+                            />
+                            {errors.numberOfIronBars && (
+                                <p className="text-sm text-red-600">
+                                    Deve ser maior que 2
+                                </p>
+                            )}
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="block text-sm font-medium text-steel-700">
+                                Tamanho das Colunas (metros){' '}
+                                <span className="text-red-500">*</span>
+                            </label>
+                            <input
+                                type="number"
+                                step="0.01"
+                                className={`w-full px-4 py-3 rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent ${
+                                    errors.metersOfColumns
+                                        ? 'border-red-300'
+                                        : 'border-steel-200'
+                                }`}
+                                {...register('metersOfColumns', {
+                                    required: true,
+                                    min: 0.01,
+                                })}
+                            />
+                            {errors.metersOfColumns && (
+                                <p className="text-sm text-red-600">
+                                    Deve ser maior que 0
+                                </p>
+                            )}
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="block text-sm font-medium text-steel-700">
+                                Metragem com Estribos (metros){' '}
+                                <span className="text-red-500">*</span>
+                            </label>
+                            <input
+                                type="number"
+                                step="0.01"
+                                className={`w-full px-4 py-3 rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent ${
+                                    errors.metersHaveStirrup
+                                        ? 'border-red-300'
+                                        : 'border-steel-200'
+                                }`}
+                                {...register('metersHaveStirrup', {
+                                    required: true,
+                                    min: 1,
+                                })}
+                            />
+                            {errors.metersHaveStirrup && (
+                                <p className="text-sm text-red-600">
+                                    Deve ser maior que 0
+                                </p>
+                            )}
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="block text-sm font-medium text-steel-700">
+                                Bitola dos Ferros (mm){' '}
+                                <span className="text-red-500">*</span>
+                            </label>
+                            <select
+                                className={`w-full px-4 py-3 rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent ${
+                                    errors.gaugeIronBars
+                                        ? 'border-red-300'
+                                        : 'border-steel-200'
+                                }`}
+                                {...register('gaugeIronBars', {
+                                    required: true,
+                                })}>
+                                <option value="4.2">4.2 mm</option>
+                                <option value="5">5.0 mm</option>
+                                <option value="6.3">6.3 mm</option>
+                                <option value="8">8.0 mm</option>
+                                <option value="10">10.0 mm</option>
+                                <option value="12.5">12.5 mm</option>
+                                <option value="16">16.0 mm</option>
+                                <option value="20">20.0 mm</option>
+                            </select>
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="block text-sm font-medium text-steel-700">
+                                Espaçamento dos Estribos (cm){' '}
+                                <span className="text-red-500">*</span>
+                            </label>
+                            <input
+                                type="number"
+                                className={`w-full px-4 py-3 rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent ${
+                                    errors.stirrupSpacing
+                                        ? 'border-red-300'
+                                        : 'border-steel-200'
+                                }`}
+                                {...register('stirrupSpacing', {
+                                    required: true,
+                                    min: 1,
+                                })}
+                            />
+                            {errors.stirrupSpacing && (
+                                <p className="text-sm text-red-600">
+                                    Deve ser maior que 0
+                                </p>
+                            )}
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 className="text-lg font-semibold text-steel-900 mb-4 flex items-center gap-2">
+                        <div className="w-1 h-6 bg-emerald-500 rounded-full"></div>
+                        Configuração dos Estribos
+                    </h3>
+
+                    <div className="mb-6">
+                        <label className="block text-sm font-medium text-steel-700 mb-3">
+                            Formato do Estribo{' '}
+                            <span className="text-red-500">*</span>
                         </label>
-                        {errors.numberOfIronBars && (
-                            <div className="invalid-feedback">
-                                Campo obrigatório e deve ser maior que 2
-                            </div>
-                        )}
-                    </div>
-
-                    <div className="form-floating mb-3 mt-3">
-                        <input
-                            type="number"
-                            step="0.01"
-                            className={`form-control ${
-                                errors.metersOfColumns ? 'is-invalid' : ''
-                            }`}
-                            {...register('metersOfColumns', {
-                                required: true,
-                                min: 0.01,
-                            })}></input>
-                        <label htmlFor="metersOfColumns">
-                            Qual tamanho em metros das colunas?
-                        </label>
-                        {errors.metersOfColumns && (
-                            <div className="invalid-feedback">
-                                Campo obrigatório e deve ser maior que 0
-                            </div>
-                        )}
-                    </div>
-
-                    <div className="form-floating mb-3 mt-3">
-                        <input
-                            type="number"
-                            step="0.01"
-                            className={`form-control ${
-                                errors.metersHaveStirrup ? 'is-invalid' : ''
-                            }`}
-                            {...register('metersHaveStirrup', {
-                                required: true,
-                                min: 1,
-                            })}></input>
-                        <label htmlFor="metersHaveStirrup">
-                            Qual metragem das colunas que irá ter estribos?
-                        </label>
-                        {errors.metersHaveStirrup && (
-                            <div className="invalid-feedback">
-                                Campo obrigatório e deve ser maior que 0
-                            </div>
-                        )}
-                    </div>
-
-                    <div className="form-floating mb-3 mt-3">
-                        <select
-                            className={`form-select ${
-                                errors.gaugeIronBars ? 'is-invalid' : ''
-                            }`}
-                            {...register('gaugeIronBars', { required: true })}>
-                            <option value="4.2">4.2</option>
-                            <option value="5">5</option>
-                            <option value="6.3">6.3</option>
-                            <option value="8">8</option>
-                            <option value="10">10</option>
-                            <option value="12.5">12.5</option>
-                            <option value="16">16</option>
-                            <option value="20">20</option>
-                        </select>
-                        <label htmlFor="gauge">
-                            Qual a bitola dos ferros {}?
-                        </label>
-                        {errors.gaugeIronBars && (
-                            <div className="invalid-feedback">
-                                Campo obrigatório
-                            </div>
-                        )}
-                    </div>
-
-                    <div className="form-floating mb-3 mt-3">
-                        <input
-                            type="number"
-                            className={`form-control ${
-                                errors.stirrupSpacing ? 'is-invalid' : ''
-                            }`}
-                            {...register('stirrupSpacing', {
-                                required: true,
-                                min: 1,
-                            })}></input>
-                        <label htmlFor="stirrupSpacing">
-                            Qual espaçamento dos estribos? (em centímetros)
-                        </label>
-                        {errors.stirrupSpacing && (
-                            <div className="invalid-feedback">
-                                Campo obrigatório e deve ser maior que 0
-                            </div>
-                        )}
-                    </div>
-
-                    <div className="form-floating mb-3 mt-3">
-                        <select
-                            className={`form-select ${
-                                errors.stirrupMeasurements?.shape
-                                    ? 'is-invalid'
-                                    : ''
-                            }`}
-                            {...register('stirrupMeasurements.shape', {
-                                required: true,
-                            })}>
-                            <option value="square">Quadrado</option>
-                            <option value="rectangular">Retangular</option>
-                            <option value="triangular">Triangular</option>
-                            <option value="circular">Circular</option>
-                        </select>
-                        <label htmlFor="">Qual shape dos estribos?</label>
-                        {errors.stirrupMeasurements?.shape && (
-                            <div className="invalid-feedback">
-                                Campo obrigatório
-                            </div>
-                        )}
-                    </div>
-
-                    {shapeValue === 'rectangular' ? (
-                        <>
-                            <div className="form-floating mb-3 mt-3">
-                                <input
-                                    type="number"
-                                    step="0.1"
-                                    className={`form-control ${
-                                        errors.stirrupMeasurements?.lengthSides
-                                            ?.length1
-                                            ? 'is-invalid'
-                                            : ''
-                                    }`}
-                                    {...register(
-                                        'stirrupMeasurements.lengthSides.length1',
-                                        {
-                                            required: true,
-                                            min: 1,
-                                        },
-                                    )}></input>
-                                <label htmlFor="">
-                                    Qual tamanho do primeiro lado dos estribos?
-                                    (em centímetros)
-                                </label>
-                                {errors.stirrupMeasurements?.lengthSides
-                                    ?.length1 && (
-                                    <div className="invalid-feedback">
-                                        Campo obrigatório e deve ser maior que 0
-                                    </div>
-                                )}
-                            </div>
-                            <div className="form-floating mb-3 mt-3">
-                                <input
-                                    type="number"
-                                    step="0.1"
-                                    className={`form-control ${
-                                        errors.stirrupMeasurements?.lengthSides
-                                            ?.length2
-                                            ? 'is-invalid'
-                                            : ''
-                                    }`}
-                                    {...register(
-                                        'stirrupMeasurements.lengthSides.length2',
-                                        {
-                                            required: true,
-                                            min: 1,
-                                        },
-                                    )}></input>
-                                <label htmlFor="">
-                                    Qual tamanho do segundo lado dos estribos?
-                                    (em centímetros)
-                                </label>
-                                {errors.stirrupMeasurements?.lengthSides
-                                    ?.length2 && (
-                                    <div className="invalid-feedback">
-                                        Campo obrigatório e deve ser maior que 0
-                                    </div>
-                                )}
-                            </div>
-                        </>
-                    ) : (
-                        <>
-                            <div className="form-floating mb-3 mt-3">
-                                {shapeValue === 'circular' ? (
-                                    <>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            {shapeOptions.map(
+                                ({ value, label, icon: Icon }) => (
+                                    <label
+                                        key={value}
+                                        className="cursor-pointer">
                                         <input
-                                            type="number"
-                                            step="0.1"
-                                            className={`form-control ${
-                                                errors.stirrupMeasurements
-                                                    ?.lengthSides?.radius
-                                                    ? 'is-invalid'
-                                                    : ''
-                                            }`}
+                                            type="radio"
+                                            value={value}
                                             {...register(
-                                                'stirrupMeasurements.lengthSides.radius',
-                                                {
-                                                    required: true,
-                                                    min: 1,
-                                                },
-                                            )}></input>
-                                        <label htmlFor="">
-                                            Qual o raio dos estribos? (em
-                                            centímetros)
-                                        </label>
-                                        {errors.stirrupMeasurements?.lengthSides
-                                            ?.radius && (
-                                            <div className="invalid-feedback">
-                                                Campo obrigatório e deve ser
-                                                maior que 0
-                                            </div>
+                                                'stirrupMeasurements.shape',
+                                                { required: true },
+                                            )}
+                                            className="sr-only peer"
+                                        />
+                                        <div className="p-4 rounded-xl border-2 transition-all peer-checked:border-emerald-500 peer-checked:bg-emerald-50 border-steel-200 hover:border-emerald-300 hover:bg-steel-50">
+                                            <Icon className="w-8 h-8 mx-auto mb-2 peer-checked:text-emerald-600 text-steel-400" />
+                                            <span className="text-sm font-medium peer-checked:text-emerald-700 text-steel-600">
+                                                {label}
+                                            </span>
+                                        </div>
+                                    </label>
+                                ),
+                            )}
+                        </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                        {shapeValue === 'rectangular' ? (
+                            <>
+                                <div className="space-y-2">
+                                    <label className="block text-sm font-medium text-steel-700">
+                                        Lado 1 (cm){' '}
+                                        <span className="text-red-500">*</span>
+                                    </label>
+                                    <input
+                                        type="number"
+                                        step="0.1"
+                                        className={`w-full px-4 py-3 rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent ${
+                                            errors.stirrupMeasurements
+                                                ?.lengthSides?.length1
+                                                ? 'border-red-300'
+                                                : 'border-steel-200'
+                                        }`}
+                                        {...register(
+                                            'stirrupMeasurements.lengthSides.length1',
+                                            {
+                                                required: true,
+                                                min: 1,
+                                            },
                                         )}
-                                    </>
-                                ) : (
-                                    <>
-                                        <input
-                                            type="number"
-                                            step="0.1"
-                                            className={`form-control ${
-                                                errors.stirrupMeasurements
+                                    />
+                                    {errors.stirrupMeasurements?.lengthSides
+                                        ?.length1 && (
+                                        <p className="text-sm text-red-600">
+                                            Deve ser maior que 0
+                                        </p>
+                                    )}
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="block text-sm font-medium text-steel-700">
+                                        Lado 2 (cm){' '}
+                                        <span className="text-red-500">*</span>
+                                    </label>
+                                    <input
+                                        type="number"
+                                        step="0.1"
+                                        className={`w-full px-4 py-3 rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent ${
+                                            errors.stirrupMeasurements
+                                                ?.lengthSides?.length2
+                                                ? 'border-red-300'
+                                                : 'border-steel-200'
+                                        }`}
+                                        {...register(
+                                            'stirrupMeasurements.lengthSides.length2',
+                                            {
+                                                required: true,
+                                                min: 1,
+                                            },
+                                        )}
+                                    />
+                                    {errors.stirrupMeasurements?.lengthSides
+                                        ?.length2 && (
+                                        <p className="text-sm text-red-600">
+                                            Deve ser maior que 0
+                                        </p>
+                                    )}
+                                </div>
+                            </>
+                        ) : (
+                            <div className="space-y-2">
+                                <label className="block text-sm font-medium text-steel-700">
+                                    {shapeValue === 'circular'
+                                        ? 'Raio (cm)'
+                                        : 'Tamanho dos Lados (cm)'}{' '}
+                                    <span className="text-red-500">*</span>
+                                </label>
+                                <input
+                                    type="number"
+                                    step="0.1"
+                                    className={`w-full px-4 py-3 rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent ${
+                                        shapeValue === 'circular'
+                                            ? errors.stirrupMeasurements
+                                                  ?.lengthSides?.radius
+                                                ? 'border-red-300'
+                                                : 'border-steel-200'
+                                            : errors.stirrupMeasurements
                                                     ?.lengthSides?.length1
-                                                    ? 'is-invalid'
-                                                    : ''
-                                            }`}
-                                            {...register(
-                                                'stirrupMeasurements.lengthSides.length1',
-                                                {
-                                                    required: true,
-                                                    min: 1,
-                                                },
-                                            )}></input>
-                                        <label htmlFor="">
-                                            Qual tamanho dos estribos? (em
-                                            centímetros)
-                                        </label>
-                                        {errors.stirrupMeasurements?.lengthSides
-                                            ?.length1 && (
-                                            <div className="invalid-feedback">
-                                                Campo obrigatório e deve ser
-                                                maior que 0
-                                            </div>
-                                        )}
-                                    </>
+                                              ? 'border-red-300'
+                                              : 'border-steel-200'
+                                    }`}
+                                    {...register(
+                                        shapeValue === 'circular'
+                                            ? 'stirrupMeasurements.lengthSides.radius'
+                                            : 'stirrupMeasurements.lengthSides.length1',
+                                        {
+                                            required: true,
+                                            min: 1,
+                                        },
+                                    )}
+                                />
+                                {((shapeValue === 'circular' &&
+                                    errors.stirrupMeasurements?.lengthSides
+                                        ?.radius) ||
+                                    (shapeValue !== 'circular' &&
+                                        errors.stirrupMeasurements?.lengthSides
+                                            ?.length1)) && (
+                                    <p className="text-sm text-red-600">
+                                        Deve ser maior que 0
+                                    </p>
                                 )}
                             </div>
-                        </>
-                    )}
-
-                    <div className="form-floating mb-3 mt-3">
-                        <select
-                            className={`form-select ${
-                                errors.stirrupMeasurements?.gauge
-                                    ? 'is-invalid'
-                                    : ''
-                            }`}
-                            {...register('stirrupMeasurements.gauge', {
-                                required: true,
-                            })}>
-                            <option value="4.2">4.2</option>
-                            <option value="5">5</option>
-                            <option value="6.3">6.3</option>
-                            <option value="8">8</option>
-                            <option value="10">10</option>
-                            <option value="12.5">12.5</option>
-                            <option value="16">16</option>
-                            <option value="20">20</option>
-                        </select>
-                        <label htmlFor="gauge">
-                            Qual a bitola dos estribos?
-                        </label>
-                        {errors.stirrupMeasurements?.gauge && (
-                            <div className="invalid-feedback">
-                                Campo obrigatório
-                            </div>
                         )}
-                    </div>
 
-                    <button className="btn btn-primary mb-4" type="submit">
-                        Calcular
-                    </button>
-                </form>
-            </section>
-        </>
+                        <div className="space-y-2">
+                            <label className="block text-sm font-medium text-steel-700">
+                                Bitola dos Estribos (mm){' '}
+                                <span className="text-red-500">*</span>
+                            </label>
+                            <select
+                                className={`w-full px-4 py-3 rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent ${
+                                    errors.stirrupMeasurements?.gauge
+                                        ? 'border-red-300'
+                                        : 'border-steel-200'
+                                }`}
+                                {...register('stirrupMeasurements.gauge', {
+                                    required: true,
+                                })}>
+                                <option value="4.2">4.2 mm</option>
+                                <option value="5">5.0 mm</option>
+                                <option value="6.3">6.3 mm</option>
+                                <option value="8">8.0 mm</option>
+                                <option value="10">10.0 mm</option>
+                                <option value="12.5">12.5 mm</option>
+                                <option value="16">16.0 mm</option>
+                                <option value="20">20.0 mm</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="pt-4">
+                    <Button
+                        type="submit"
+                        variant="primary"
+                        size="lg"
+                        fullWidth
+                        icon={<Columns className="w-5 h-5" />}>
+                        Calcular Colunas
+                    </Button>
+                </div>
+            </form>
+        </div>
     );
 };
 
