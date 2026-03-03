@@ -11,6 +11,7 @@ function Header() {
         { to: '/calculator-sapatas', label: 'Sapatas' },
         { to: '/calculator-estribos', label: 'Estribos' },
         { to: '/calculator-colunas', label: 'Colunas' },
+        { to: '/calculator-dobras-especiais', label: 'Dobras Especiais' },
     ];
 
     return (

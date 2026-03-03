@@ -6,6 +6,7 @@ import {
     Square,
     SquaresExclude,
     History,
+    Layers,
 } from 'lucide-react';
 import Header from './common/Header';
 import Footer from './common/Footer';
@@ -39,6 +40,14 @@ function Home() {
             title: 'Colunas',
             description: 'Dimensionamento completo de colunas',
             color: 'from-emerald-500 to-teal-500',
+        },
+        {
+            to: '/calculator-dobras-especiais',
+            icon: Layers,
+            title: 'Dobras Especiais',
+            description:
+                'Peso de perfis dobrados: UDC, Enrijecido, Cartola e Cantoneira',
+            color: 'from-indigo-500 to-violet-500',
         },
     ];
 
