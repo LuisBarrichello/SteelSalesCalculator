@@ -7,10 +7,10 @@ function Header() {
 
     const navLinks = [
         { to: '/', label: 'Home' },
-        { to: '/calculator-bobininhas', label: 'Bobininhas' },
         { to: '/calculator-sapatas', label: 'Sapatas' },
         { to: '/calculator-estribos', label: 'Estribos' },
         { to: '/calculator-colunas', label: 'Colunas' },
+        { to: '/calculator-bobininhas', label: 'Bobininhas' },
         { to: '/calculator-dobras-especiais', label: 'Dobras Especiais' },
     ];
 

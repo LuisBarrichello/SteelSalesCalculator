@@ -53,7 +53,7 @@ export function handleCalculation(form: BendingFormData): BendingResult {
     const { profileType, thickness, length, quantity, B, A, a, L1, L2 } = form;
 
     // Peso/m² de chapa de aço = espessura(mm) × 7,85 kg/m²
-    const weightPerM2 = thickness * 7.85;
+    const weightPerM2 = Math.ceil(thickness * 7.85);
     const discount = DISCOUNT_FACTOR[profileType] * thickness;
 
     let grossWidth = 0;

@@ -14,13 +14,6 @@ import Footer from './common/Footer';
 function Home() {
     const calculators = [
         {
-            to: '/calculator-bobininhas',
-            icon: CirclePile,
-            title: 'Bobininhas',
-            description: 'Cálculo de peso e cortes de bobinas de aço',
-            color: 'from-blue-500 to-cyan-500',
-        },
-        {
             to: '/calculator-sapatas',
             icon: Grid3x3,
             title: 'Sapatas',
@@ -40,6 +33,13 @@ function Home() {
             title: 'Colunas',
             description: 'Dimensionamento completo de colunas',
             color: 'from-emerald-500 to-teal-500',
+        },
+        {
+            to: '/calculator-bobininhas',
+            icon: CirclePile,
+            title: 'Bobininhas',
+            description: 'Cálculo de peso e cortes de bobinas de aço',
+            color: 'from-blue-500 to-cyan-500',
         },
         {
             to: '/calculator-dobras-especiais',
@@ -79,7 +79,7 @@ function Home() {
                             <div className="px-6 py-3 bg-white rounded-lg shadow-sm border border-steel-200">
                                 <p className="text-sm text-steel-600">Rápido</p>
                                 <p className="text-2xl font-bold text-primary-600">
-                                    +4
+                                    {calculators.length}
                                 </p>
                                 <p className="text-xs text-steel-500">
                                     Calculadoras
@@ -99,7 +99,7 @@ function Home() {
                             <div className="px-6 py-3 bg-white rounded-lg shadow-sm border border-steel-200">
                                 <p className="text-sm text-steel-600">Fácil</p>
                                 <p className="text-2xl font-bold text-primary-600">
-                                    2min
+                                    1min
                                 </p>
                                 <p className="text-xs text-steel-500">
                                     Por cálculo
@@ -120,14 +120,14 @@ function Home() {
                     </div>
 
                     {/* Calculator Cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="flex flex-wrap justify-center gap-6">
                         {calculators.map((calc) => {
                             const Icon = calc.icon;
                             return (
                                 <Link
                                     key={calc.to}
                                     to={calc.to}
-                                    className="group relative bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
+                                    className="w-full sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] max-w-100 group relative bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
                                     {/* Gradient Header */}
                                     <div
                                         className={`h-2 bg-linear-to-r ${calc.color}`}
