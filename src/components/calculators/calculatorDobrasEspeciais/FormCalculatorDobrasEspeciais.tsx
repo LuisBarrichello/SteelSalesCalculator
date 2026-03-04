@@ -1,4 +1,4 @@
-import { Layers, FlipVertical2, PanelBottomOpen, Triangle } from 'lucide-react';
+import { Layers } from 'lucide-react';
 import { FormInput } from '../../common/forms/FormInput';
 import { Button } from '../../common/buttons/Button';
 import {
@@ -131,7 +131,6 @@ export default function FormCalculatorDobrasEspeciais({
         setFormData((prev) => ({ ...prev, [field]: value }));
 
     const isL = formData.profileType === 'l';
-    const hasA = !isL;
     const hasSa =
         formData.profileType === 'enrijecido' ||
         formData.profileType === 'cartola';
