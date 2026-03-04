@@ -12,7 +12,7 @@ export interface CalculationHistoryItem {
     id: string;
     date: string;
     timestamp: number;
-    type: 'bobininhas' | 'sapatas' | 'estribos' | 'colunas';
+    type: 'bobininhas' | 'sapatas' | 'estribos' | 'colunas' | 'dobras';
     data: CalculationData;
     result: CalculationResult;
     summary: string;
@@ -21,7 +21,7 @@ export interface CalculationHistoryItem {
 const MAX_HISTORY_ITEMS = 20;
 
 export function useCalculationHistory(
-    calculatorType: 'bobininhas' | 'sapatas' | 'estribos' | 'colunas',
+    calculatorType: 'bobininhas' | 'sapatas' | 'estribos' | 'colunas' | 'dobras',
 ) {
     const storageKey = `ssc_history_${calculatorType}`;
 
