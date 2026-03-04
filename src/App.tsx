@@ -3,11 +3,12 @@ import CalculatorSapatas from './components/calculators/calculatorsSapatas/Calcu
 import CalculatorBobininhas from './components/calculators/calculatorBobininhas/CalculatorBobininhas';
 import CalculatorEstribos from './components/calculators/calculatorEstribos/CalculatorEstribos';
 import CalculatorColunas from './components/calculators/calculatorColunas/CalculatorColunas';
+import CalculatorDobrasEspeciais from './components/calculators/calculatorDobrasEspeciais/CalculatorDobrasEspeciais';
 import Home from './components/Home';
 
 function App() {
     return (
-        <div className="min-h-screen bg-gradient-to-br from-steel-50 to-primary-50">
+        <div className="min-h-screen bg-linear-to-br from-steel-50 to-primary-50">
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route
@@ -25,6 +26,10 @@ function App() {
                 <Route
                     path="/calculator-colunas"
                     element={<CalculatorColunas />}
+                />
+                <Route
+                    path="/calculator-dobras-especiais"
+                    element={<CalculatorDobrasEspeciais />}
                 />
             </Routes>
         </div>
