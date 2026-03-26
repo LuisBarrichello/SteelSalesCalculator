@@ -12,6 +12,7 @@ function Header() {
         { to: '/calculator-colunas', label: 'Colunas' },
         { to: '/calculator-bobininhas', label: 'Bobininhas' },
         { to: '/calculator-dobras-especiais', label: 'Dobras Especiais' },
+        { to: '/routes', label: 'Rotas' },
     ];
 
     return (
