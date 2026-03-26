@@ -3,7 +3,6 @@ import SP_CITIES_RAW from '../../../data/spCities.json';
 export type ReportFormat = 'selecao' | 'alternativa' | 'unknown';
 
 // ── Vehicle types ─────────────────────────────────────────────
-
 export interface VehicleType {
     id: string;
     label: string;
@@ -350,13 +349,26 @@ export function exportCSV(orders: RouteOrder[]): string {
 
 export function suggestRoutes(
     orders: RouteOrder[],
-    fleet: VehicleType[] = DEFAULT_FLEET,
+    fleet: VehicleType[],
     geoRadiusKm = 0,
 ): RouteSuggestion[] {
-    const vehiclePool = fleet
+    const safeFleet =
+        fleet && fleet.length > 0
+            ? fleet
+            : [
+                  {
+                      id: 'none',
+                      label: 'SEM FROTA CONFIGURADA',
+                      capacityKg: 999999,
+                      maxLengthM: 99,
+                      count: 1,
+                  },
+              ];
+
+    const vehiclePool = safeFleet
         .filter((v) => v.count > 0)
         .sort((a, b) => a.capacityKg - b.capacityKg);
-    const biggestVehicle = [...fleet].sort(
+    const biggestVehicle = [...safeFleet].sort(
         (a, b) => b.capacityKg - a.capacityKg,
     )[0];
     const pool = vehiclePool.length > 0 ? vehiclePool : [biggestVehicle];
