@@ -4,6 +4,7 @@ import CalculatorBobininhas from './components/calculators/calculatorBobininhas/
 import CalculatorEstribos from './components/calculators/calculatorEstribos/CalculatorEstribos';
 import CalculatorColunas from './components/calculators/calculatorColunas/CalculatorColunas';
 import CalculatorDobrasEspeciais from './components/calculators/calculatorDobrasEspeciais/CalculatorDobrasEspeciais';
+import RoutesPage from './components/routes/RoutesPage';
 import Home from './components/Home';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
                     path="/calculator-dobras-especiais"
                     element={<CalculatorDobrasEspeciais />}
                 />
+                <Route path="/routes" element={<RoutesPage />} />
             </Routes>
         </div>
     );
