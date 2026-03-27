@@ -53,7 +53,7 @@ export function Button({
             type={type}
             onClick={onClick}
             disabled={disabled}
-            className={`${baseClasses} ${variants[variant]} ${sizes[size]} ${className}`.trim()}>
+            className={`cursor-pointer ${baseClasses} ${variants[variant]} ${sizes[size]} ${className}`.trim()}>
             {icon && <span className="shrink-0">{icon}</span>}
             {children}
         </button>

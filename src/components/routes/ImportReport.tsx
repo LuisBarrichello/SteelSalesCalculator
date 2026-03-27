@@ -34,10 +34,7 @@ const FORMAT_LABELS: Record<ReportFormat, string> = {
     unknown: 'Formato não identificado',
 };
 
-// ── PDF text extraction ───────────────────────────────────────
-// Bug fix: pdfjs returns items in content-stream order (not visual order).
-// Must sort by position FIRST, then group by Y, then sort X within each line.
-
+// PDF text extraction
 async function extractPdfText(file: File): Promise<string> {
     const buffer = await file.arrayBuffer();
     const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
@@ -45,7 +42,6 @@ async function extractPdfText(file: File): Promise<string> {
 
     for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
         const page = await pdf.getPage(pageNum);
-        // O Viewport normaliza as coordenadas reais da tela, resolvendo a rotação
         const viewport = page.getViewport({ scale: 1.0 });
         const content = await page.getTextContent();
 
@@ -53,11 +49,10 @@ async function extractPdfText(file: File): Promise<string> {
         const items = (content.items as PdfItem[]).filter((i) => i.str.trim());
 
         const positioned = items.map((i) => {
-            // Usa a utilidade do PDF.js para mapear as matrizes de desenho para coordenadas de leitura
             const tx = pdfjsLib.Util.transform(viewport.transform, i.transform);
             return {
                 x: tx[4],
-                y: tx[5], // No viewport normalizado, Y=0 é o topo e cresce para baixo
+                y: tx[5],
                 text: i.str,
             };
         });
@@ -75,8 +70,7 @@ async function extractPdfText(file: File): Promise<string> {
             if (!buckets.has(key)) buckets.set(key, []);
             buckets.get(key)!.push(item);
         }
-
-        // Ordena de cima para baixo (ya - yb) e da esquerda para direita (a.x - b.x)
+        
         const lines = [...buckets.entries()]
             .sort(([ya], [yb]) => ya - yb)
             .map(([, lineItems]) =>
@@ -84,7 +78,7 @@ async function extractPdfText(file: File): Promise<string> {
                     .sort((a, b) => a.x - b.x)
                     .map((i) => i.text)
                     .join(' ')
-                    .replace(/\s{2,}/g, ' ') // Remove espaços bizarros gerados na extração
+                    .replace(/\s{2,}/g, ' ') // Removes odd gaps generated during extraction.
                     .trim(),
             )
             .filter(Boolean);
@@ -107,7 +101,6 @@ function downloadCSV(result: ParseResult) {
     URL.revokeObjectURL(url);
 }
 
-// ── Component ─────────────────────────────────────────────────
 
 export default function ImportReport({ onParsed }: Props) {
     const inputRef = useRef<HTMLInputElement>(null);

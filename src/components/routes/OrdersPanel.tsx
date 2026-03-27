@@ -23,10 +23,10 @@ import { Button } from '../common/buttons/Button';
 import { useRestrictions } from './hooks/useRestrictions';
 import { useRouteManager } from './hooks/useRouteManager';
 
-// Utilitários e Tipos
+// Utilities and Types
 import { cleanCode, ERP_STATUS_COLORS } from './utils/formatters';
 
-// Componentes UI
+// UI Components
 import { WeightGauge } from './components/WeightGauge';
 import { CityGroupRow } from './components/CityGroupRow';
 import { PlannedRouteCard } from './components/PlannedRouteCard';
@@ -105,9 +105,9 @@ export default function OrdersPanel({ orders }: { orders: RouteOrder[] }) {
                 onClear={clearFleet}
             />
 
-            {/* Lado Esquerdo - Painel de Decisão */}
+            {/* Left Side - Decision Panel */}
             <div className="flex-1 min-w-0 space-y-4">
-                {/* Cabeçalho de Filtros */}
+                {/* Filter Header */}
                 <div className="flex flex-col gap-3">
                     <div className="flex items-center justify-between gap-2 flex-wrap">
                         <div className="relative">
@@ -311,9 +311,8 @@ export default function OrdersPanel({ orders }: { orders: RouteOrder[] }) {
                     </div>
                 )}
 
-                {/* Conteúdo Dinâmico */}
+                {/* Dynamic Content */}
                 {isMapView ? (
-                    /* VISUALIZAÇÃO DO MAPA */
                     <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
                         <RouteMap
                             unassignedCities={manager.cityGroups}
@@ -321,7 +320,6 @@ export default function OrdersPanel({ orders }: { orders: RouteOrder[] }) {
                         />
                     </div>
                 ) : (
-                    /* VISUALIZAÇÃO DAS LISTAS (Fragmento limpo) */
                     <>
                         {manager.viewMode === 'routes' ? (
                             /* Aba de Rotas Planeadas */
@@ -346,7 +344,6 @@ export default function OrdersPanel({ orders }: { orders: RouteOrder[] }) {
                                 )}
                             </div>
                         ) : (
-                            /* Outras Abas (Cidades Soltas) */
                             <div className="space-y-2">
                                 {manager.cityGroups.length === 0 ? (
                                     <div className="text-center py-16 text-steel-400">
@@ -397,7 +394,7 @@ export default function OrdersPanel({ orders }: { orders: RouteOrder[] }) {
                 )}
             </div>
 
-            {/* Lado Direito - Painel de Veículo e Resumo */}
+            {/* Right Side - Vehicle Dashboard and Summary */}
             <div className="w-full lg:w-72 lg:sticky lg:top-6 space-y-4 shrink-0">
                 <div className="bg-white rounded-2xl border-2 border-steel-200 p-5 space-y-4">
                     <h3 className="text-sm font-semibold text-steel-700 flex items-center gap-2">
@@ -414,7 +411,8 @@ export default function OrdersPanel({ orders }: { orders: RouteOrder[] }) {
                             {fleet.map((v) => (
                                 <option key={v.id} value={v.id}>
                                     {v.label} —{' '}
-                                    {(v.capacityKg / 1000).toFixed(1)}t
+                                    {(v.capacityKg / 1000).toFixed(1)}t —{' '}
+                                    {v.maxLengthM.toFixed(2)}m
                                 </option>
                             ))}
                         </select>
@@ -484,7 +482,7 @@ export default function OrdersPanel({ orders }: { orders: RouteOrder[] }) {
                                 }>
                                 {copied
                                     ? 'Copiado!'
-                                    : 'Copiar pedidos para ERP'}
+                                    : `Copiar Núm. ${manager.selectedList.length} pedidos`}
                             </Button>
                             <Button
                                 fullWidth

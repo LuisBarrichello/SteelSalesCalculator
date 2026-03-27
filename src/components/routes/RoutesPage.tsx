@@ -21,8 +21,7 @@ export default function RoutesPage() {
     const [step, setStep] = useState<Step>('import');
     const [parseResult, setParseResult] = useState<ParseResult | null>(null);
     const [isRestored, setIsRestored] = useState(false);
-
-    // 1. CARREGAR SESSÃO SALVA (Quando a página abre)
+    
     useEffect(() => {
         const savedResult = localStorage.getItem('routing_parseResult');
         const savedStep = localStorage.getItem('routing_step');
@@ -30,7 +29,6 @@ export default function RoutesPage() {
         if (savedResult) {
             try {
                 const parsed = JSON.parse(savedResult);
-                // "Re-hidratação" das Datas (JSON converte Date para String)
                 const restoredOrders = parsed.orders.map((o: any) => ({
                     ...o,
                     originalDelivery: o.originalDelivery
@@ -47,8 +45,7 @@ export default function RoutesPage() {
             }
         }
     }, []);
-
-    // 2. SALVAR SESSÃO (Sempre que o PDF ou a Aba mudarem)
+    
     useEffect(() => {
         if (parseResult) {
             localStorage.setItem(
@@ -59,7 +56,6 @@ export default function RoutesPage() {
         }
     }, [parseResult, step]);
 
-    // 3. BOTÃO DE EMERGÊNCIA: Limpar Tudo
     const clearSession = () => {
         if (
             confirm(
@@ -76,10 +72,8 @@ export default function RoutesPage() {
     };
 
     const handleNewUpload = (result: ParseResult) => {
-        // Se subir um PDF novo, zera as rotas planejadas do PDF antigo
         localStorage.removeItem('routing_plannedRoutes');
         setParseResult(result);
-        setStep('panel');
     };
 
     const steps = [
@@ -100,7 +94,6 @@ export default function RoutesPage() {
             <Header />
             <main className="grow bg-linear-to-br from-steel-50 to-primary-50 py-8">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-                    {/* Alerta de Auto-Save e Botão de Limpar Sessão */}
                     {parseResult && (
                         <div className="bg-sky-50 border border-sky-200 px-5 py-3 rounded-xl flex flex-wrap items-center justify-between gap-4 shadow-sm animate-in fade-in slide-in-from-top-4">
                             <div className="flex items-center gap-2 text-sky-800 text-sm font-medium">
@@ -125,7 +118,7 @@ export default function RoutesPage() {
                     )}
 
                     <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-                        <div className="bg-gradient-to-r from-sky-600 to-cyan-700 px-6 py-8 sm:px-8">
+                        <div className="bg-linear-to-r from-sky-600 to-cyan-700 px-6 py-8 sm:px-8">
                             <div className="flex items-center gap-3">
                                 <div className="p-3 bg-white/10 rounded-xl backdrop-blur-sm">
                                     <Truck className="w-8 h-8 text-white" />
