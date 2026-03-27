@@ -1,4 +1,5 @@
 import SP_CITIES_RAW from '../../../data/spCities.json';
+import { normalizeCity } from './geo';
 
 export type ReportFormat = 'selecao' | 'alternativa' | 'unknown';
 
@@ -66,13 +67,13 @@ export interface RouteSuggestion {
 
 const CITY_COORDS = new Map<string, { lat: number; lng: number }>(
     (SP_CITIES_RAW as { name: string; lat: number; lng: number }[]).map((c) => [
-        c.name.toUpperCase().trim(),
+        normalizeCity(c.name),
         { lat: c.lat, lng: c.lng },
     ]),
 );
 
 function getCityCoords(city: string) {
-    return CITY_COORDS.get(city.toUpperCase().trim()) ?? null;
+    return CITY_COORDS.get(normalizeCity(city)) ?? null;
 }
 
 function haversineKm(
@@ -187,7 +188,7 @@ function parseSelecaoLine(line: string): Partial<RouteOrder> | null {
         order: m[2],
         customerCode: m[3],
         customer: m[4].trim(),
-        city: m[5].trim().toUpperCase(),
+        city: normalizeCity(m[5]),
         salesperson: m[6].trim(),
         weight: parseNumberBR(m[7]),
         originalDelivery: null,
@@ -237,7 +238,7 @@ function parseAlternativaLine(
         customerCode,
         customer,
         salesperson,
-        city: m[5].trim().toUpperCase(),
+        city: normalizeCity(m[5]),
         originalDelivery,
         newDelivery,
         pickup: m[6].toUpperCase() === 'SIM',

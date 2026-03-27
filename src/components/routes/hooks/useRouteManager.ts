@@ -27,6 +27,10 @@ export function useRouteManager(
         new Set(),
     );
 
+    useEffect(() => {
+        setExpandedCities(new Set(orders.map((o) => o.city)));
+    }, [orders]);
+
     const [plannedRoutes, setPlannedRoutes] = useState<PlannedRoute[]>(() => {
         const saved = localStorage.getItem('routing_plannedRoutes');
         if (saved) {
