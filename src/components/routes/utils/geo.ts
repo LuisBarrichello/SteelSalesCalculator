@@ -1,8 +1,16 @@
 import SP_CITIES_RAW from '../../../data/spCities.json';
 
+export const normalizeCity = (city: string) => {
+    return city
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toUpperCase()
+        .trim();
+};
+
 export const CITY_COORDS = new Map<string, { lat: number; lng: number }>(
     (SP_CITIES_RAW as { name: string; lat: number; lng: number }[]).map((c) => [
-        c.name.toUpperCase().trim(),
+        normalizeCity(c.name),
         { lat: c.lat, lng: c.lng },
     ]),
 );
@@ -25,8 +33,8 @@ export function haversineKm(
 }
 
 export function distanceBetweenCities(a: string, b: string): number | null {
-    const ca = CITY_COORDS.get(a.toUpperCase().trim());
-    const cb = CITY_COORDS.get(b.toUpperCase().trim());
+    const ca = CITY_COORDS.get(normalizeCity(a));
+    const cb = CITY_COORDS.get(normalizeCity(b));
     if (!ca || !cb) return null;
     return haversineKm(ca.lat, ca.lng, cb.lat, cb.lng);
 }
