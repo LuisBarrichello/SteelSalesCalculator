@@ -1,0 +1,362 @@
+[
+    {
+        "name": "AMERICANA",
+        "lat": -22.7388,
+        "lng": -47.3328
+    },
+    {
+        "name": "ANGATUBA",
+        "lat": -23.4902,
+        "lng": -48.4119
+    },
+    {
+        "name": "ARAÇOIABA DA SERRA",
+        "lat": -23.6622,
+        "lng": -47.6175
+    },
+    {
+        "name": "AVARE",
+        "lat": -23.0992,
+        "lng": -48.9253
+    },
+    {
+        "name": "BARAO DE ANTONINA",
+        "lat": -23.6400,
+        "lng": -49.1950
+    },
+    {
+        "name": "BARRA BONITA",
+        "lat": -22.4917,
+        "lng": -48.5575
+    },
+    {
+        "name": "BARIRI",
+        "lat": -22.0744,
+        "lng": -48.7386
+    },
+    {
+        "name": "BAURU",
+        "lat": -22.3246,
+        "lng": -49.0959
+    },
+    {
+        "name": "BOTUCATU",
+        "lat": -22.8858,
+        "lng": -48.4458
+    },
+    {
+        "name": "BOITUVA",
+        "lat": -23.2836,
+        "lng": -47.6719
+    },
+    {
+        "name": "BROTAS",
+        "lat": -22.2819,
+        "lng": -48.1256
+    },
+    {
+        "name": "BURI",
+        "lat": -23.7953,
+        "lng": -48.6014
+    },
+    {
+        "name": "CABREUVA",
+        "lat": -23.3066,
+        "lng": -47.1331
+    },
+    {
+        "name": "CAPAO BONITO",
+        "lat": -24.0050,
+        "lng": -48.3497
+    },
+    {
+        "name": "CAPIVARI",
+        "lat": -22.9961,
+        "lng": -47.5067
+    },
+    {
+        "name": "CARAPICUIBA",
+        "lat": -23.5219,
+        "lng": -46.8350
+    },
+    {
+        "name": "CERQUILHO",
+        "lat": -23.1561,
+        "lng": -47.7453
+    },
+    {
+        "name": "CERQUEIRA CESAR",
+        "lat": -23.0367,
+        "lng": -49.1658
+    },
+    {
+        "name": "CESARIO LANGE",
+        "lat": -23.2261,
+        "lng": -47.9500
+    },
+    {
+        "name": "CHAPEL DO ALTO",
+        "lat": -23.4658,
+        "lng": -47.7403
+    },
+    {
+        "name": "CONCHAS",
+        "lat": -23.0153,
+        "lng": -48.0139
+    },
+    {
+        "name": "CORDEIROPOLIS",
+        "lat": -22.4811,
+        "lng": -47.4561
+    },
+    {
+        "name": "COTIA",
+        "lat": -23.6033,
+        "lng": -46.9196
+    },
+    {
+        "name": "DOIS CORREGOS",
+        "lat": -22.3664,
+        "lng": -48.3800
+    },
+    {
+        "name": "ELIAS FAUSTO",
+        "lat": -23.0494,
+        "lng": -47.3806
+    },
+    {
+        "name": "FERRAZ DE VASCONCELOS",
+        "lat": -23.5422,
+        "lng": -46.3694
+    },
+    {
+        "name": "GUAREI",
+        "lat": -23.3619,
+        "lng": -48.1906
+    },
+    {
+        "name": "GUARULHOS",
+        "lat": -23.4628,
+        "lng": -46.5333
+    },
+    {
+        "name": "IBIUNA",
+        "lat": -23.6581,
+        "lng": -47.2228
+    },
+    {
+        "name": "INDAIATUBA",
+        "lat": -23.0906,
+        "lng": -47.2189
+    },
+    {
+        "name": "ITAPETININGA",
+        "lat": -23.5917,
+        "lng": -48.0531
+    },
+    {
+        "name": "ITAPEVA",
+        "lat": -23.9822,
+        "lng": -48.8756
+    },
+    {
+        "name": "ITARARE",
+        "lat": -24.1125,
+        "lng": -49.3314
+    },
+    {
+        "name": "ITATINGA",
+        "lat": -23.1019,
+        "lng": -48.6147
+    },
+    {
+        "name": "ITU",
+        "lat": -23.2644,
+        "lng": -47.2994
+    },
+    {
+        "name": "ITAJU",
+        "lat": -22.2256,
+        "lng": -48.6136
+    },
+    {
+        "name": "JAU",
+        "lat": -22.2961,
+        "lng": -48.5581
+    },
+    {
+        "name": "JUMIRIM",
+        "lat": -23.1850,
+        "lng": -47.8183
+    },
+    {
+        "name": "LARANJAL PAULISTA",
+        "lat": -23.0453,
+        "lng": -47.8461
+    },
+    {
+        "name": "LENCOIS PAULISTA",
+        "lat": -22.5986,
+        "lng": -48.8000
+    },
+    {
+        "name": "LENÇOIS PAULISTA",
+        "lat": -22.5986,
+        "lng": -48.8000
+    },
+    {
+        "name": "LINS",
+        "lat": -21.6778,
+        "lng": -49.7447
+    },
+    {
+        "name": "MACATUBA",
+        "lat": -22.5003,
+        "lng": -48.7131
+    },
+    {
+        "name": "MAIRINQUE",
+        "lat": -23.5431,
+        "lng": -47.1847
+    },
+    {
+        "name": "MARILIA",
+        "lat": -22.2139,
+        "lng": -49.9458
+    },
+    {
+        "name": "NOVA ODESSA",
+        "lat": -22.7814,
+        "lng": -47.2969
+    },
+    {
+        "name": "PARANAPANEMA",
+        "lat": -23.3908,
+        "lng": -48.7264
+    },
+    {
+        "name": "PEDERNEIRAS",
+        "lat": -22.3519,
+        "lng": -48.7736
+    },
+    {
+        "name": "PIEDADE",
+        "lat": -23.7100,
+        "lng": -47.4219
+    },
+    {
+        "name": "PILAR DO SUL",
+        "lat": -23.8122,
+        "lng": -47.7178
+    },
+    {
+        "name": "PIRACICABA",
+        "lat": -22.7253,
+        "lng": -47.6492
+    },
+    {
+        "name": "PIRAPORA DO BOM JESUS",
+        "lat": -23.3967,
+        "lng": -47.0364
+    },
+    {
+        "name": "PORANGABA",
+        "lat": -23.1733,
+        "lng": -48.1247
+    },
+    {
+        "name": "PORTO FELIZ",
+        "lat": -23.2139,
+        "lng": -47.5247
+    },
+    {
+        "name": "RIBEIRAO BRANCO",
+        "lat": -24.2200,
+        "lng": -48.9761
+    },
+    {
+        "name": "RIBEIRAO PRETO",
+        "lat": -21.1704,
+        "lng": -47.8103
+    },
+    {
+        "name": "SAO CARLOS",
+        "lat": -22.0174,
+        "lng": -47.8908
+    },
+    {
+        "name": "SAO PAULO",
+        "lat": -23.5505,
+        "lng": -46.6333
+    },
+    {
+        "name": "SAO ROQUE",
+        "lat": -23.5294,
+        "lng": -47.1361
+    },
+    {
+        "name": "SALTO",
+        "lat": -23.2008,
+        "lng": -47.2906
+    },
+    {
+        "name": "SALTO DE PIRAPORA",
+        "lat": -23.6461,
+        "lng": -47.5719
+    },
+    {
+        "name": "SOCORRO",
+        "lat": -22.5906,
+        "lng": -46.5281
+    },
+    {
+        "name": "SOROCABA",
+        "lat": -23.5015,
+        "lng": -47.4526
+    },
+    {
+        "name": "TAQUARIVAI",
+        "lat": -23.9222,
+        "lng": -48.6917
+    },
+    {
+        "name": "TATUI",
+        "lat": -23.3561,
+        "lng": -47.8572
+    },
+    {
+        "name": "TIETE",
+        "lat": -23.1117,
+        "lng": -47.7153
+    },
+    {
+        "name": "TORRINHA",
+        "lat": -22.4228,
+        "lng": -48.1708
+    },
+    {
+        "name": "VARZEA PAULISTA",
+        "lat": -23.2117,
+        "lng": -46.8281
+    },
+    {
+        "name": "VOTORANTIM",
+        "lat": -23.5472,
+        "lng": -47.4361
+    },
+    {
+        "name": "BARAO DE ANTONINA",
+        "lat": -23.6400,
+        "lng": -49.1950
+    },
+    {
+        "name": "ANGATUBA",
+        "lat": -23.4902,
+        "lng": -48.4119
+    },
+    {
+        "name": "CAPELA DO ALTO",
+        "lat": -23.4658,
+        "lng": -47.7403
+    }
+]
